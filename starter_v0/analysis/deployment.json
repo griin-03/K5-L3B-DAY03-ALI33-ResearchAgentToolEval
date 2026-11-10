@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-11-10T18:53:49+07:00",
+  "url": "https://ali33.sunstudy.app",
+  "origin_https_health": 200,
+  "tls_certificate_expires": "2027-02-08",
+  "vps_unit_tests": "97 passed, 0 failed, 0 skipped",
+  "edge_probe_from_vps": {
+    "status": 403,
+    "headers": {
+      "Content-Type": "text/html; charset=UTF-8",
+      "Server": "cloudflare"
+    }
+  },
+  "live_api_checks": [
+    {
+      "query": "Đọc https://example.com và tóm tắt ngắn, dẫn nguồn.",
+      "status": "waiting_for_user",
+      "tools": [
+        "clarify"
+      ],
+      "tool_errors": [],
+      "elapsed_seconds": 1.64,
+      "transcript_id": "ui_d7042d241fd44fc694d559b830a789a4"
+    },
+    {
+      "query": "Tìm 2 tin AI hôm nay trên web và dẫn link.",
+      "status": "answered",
+      "tools": [
+        "lookup"
+      ],
+      "tool_errors": [],
+      "elapsed_seconds": 5.64,
+      "transcript_id": "ui_37b962df8b60499784ab81f009a215fb"
+    },
+    {
+      "query": "Lấy 1 tweet mới nhất của Sam Altman, giữ link gốc.",
+      "status": "answered",
+      "tools": [
+        "timeline"
+      ],
+      "tool_errors": [],
+      "elapsed_seconds": 6.65,
+      "transcript_id": "ui_d76a10e4c56a4ad6a6d3da9e4fbbce4b"
+    }
+  ],
+  "all_live_checks_passed": false,
+  "external_http_probe": {
+    "root_status": 200,
+    "health_status": 200,
+    "server": "cloudflare",
+    "observation": "Recorded from the successful external probe during deployment; no new UI/eval run started."
+  }
+}

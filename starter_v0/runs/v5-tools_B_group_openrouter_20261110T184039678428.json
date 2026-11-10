@@ -1,0 +1,772 @@
+{
+  "run_id": "v5-tools_B_group_openrouter_20261110T184039678428",
+  "version": "v5-tools",
+  "artifact_version": "v5-tools+p6919bdb2b1cb+tb2d4a2c7d18b",
+  "prompt_hash": "6919bdb2b1cbcd38535518354c03f10dcef654147c87c5415259ddd7c76b388d",
+  "tools_hash": "b2d4a2c7d18b148616f58b13c996ff45d1b40c570bc39cdab2688ebb26007d00",
+  "phase": "B",
+  "suite": "group",
+  "provider": "openrouter",
+  "model": "openai/gpt-4o-mini",
+  "system_prompt": "artifacts/versions/v5-tools/system_prompt.md",
+  "tools": "artifacts/versions/v5-tools/tools.yaml",
+  "eval_cases": "data/eval_group.json",
+  "dataset_id": "ali33_tung_independent_v1",
+  "dataset_role": "group",
+  "description": "10 independently authored cases, frozen before the first group-suite run. Dedup cases grade routing automatically; original payload and resulting counts require manual review because the supplied evaluator does not compare lists of objects safely.",
+  "generated_at": "2026-11-10T18:40:39",
+  "summary": {
+    "total_cases": 10,
+    "measured_cases": 10,
+    "provider_error_cases": 0,
+    "passed_cases": 10,
+    "case_accuracy": 1.0,
+    "tool_routing_accuracy": 1.0,
+    "argument_accuracy": 1.0,
+    "multiturn_accuracy": 1.0,
+    "failure_counts": {},
+    "observed_mismatch_counts": {}
+  },
+  "results": [
+    {
+      "id": "G01_dedup_tracking_sources",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Route supplied URL objects to the new local tool; manually verify 3 inputs, 2 unique, first metadata retained."
+      },
+      "input": "Loại nguồn trùng trong danh sách sau, giữ nguyên dữ liệu gốc của nguồn đầu tiên: [{\"title\":\"First\",\"url\":\"https://example.com/report?utm_source=class\"},{\"title\":\"Again\",\"url\":\"https://example.com/report\"},{\"url\":\"https://example.com/other\"}]. Chỉ lọc trùng, không tìm thêm và chưa định dạng.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "deduplicate_sources",
+            "args": {}
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "deduplicate_sources",
+            "args": {
+              "items": [
+                {
+                  "title": "First",
+                  "url": "https://example.com/report?utm_source=class"
+                },
+                {
+                  "title": "Again",
+                  "url": "https://example.com/report"
+                },
+                {
+                  "url": "https://example.com/other"
+                }
+              ]
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "deduplicate_sources",
+          "args": {
+            "items": [
+              {
+                "title": "First",
+                "url": "https://example.com/report?utm_source=class"
+              },
+              {
+                "title": "Again",
+                "url": "https://example.com/report"
+              },
+              {
+                "url": "https://example.com/other"
+              }
+            ]
+          },
+          "result": {
+            "tool": "deduplicate_sources",
+            "items": [
+              {
+                "title": "First",
+                "url": "https://example.com/report?utm_source=class"
+              },
+              {
+                "url": "https://example.com/other"
+              }
+            ],
+            "input_count": 3,
+            "unique_count": 2,
+            "duplicate_count": 1,
+            "duplicates": [
+              {
+                "url": "https://example.com/report",
+                "kept_url": "https://example.com/report?utm_source=class"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G02_health_news_month_limit",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Combine monthly news window with an explicit result count in a different domain."
+      },
+      "input": "Tìm đúng 3 tin y tế trên web trong tháng này; dùng tìm kiếm tin tức.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "topic": "news",
+              "timeframe": "month",
+              "max_results": 3
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "y tế",
+              "topic": "news",
+              "timeframe": "month",
+              "max_results": 3
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "y tế",
+            "topic": "news",
+            "timeframe": "month",
+            "max_results": 3
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "y tế",
+            "topic": "news",
+            "timeframe": "month",
+            "items": [
+              {
+                "title": "Trao quyết định bổ nhiệm tân Thứ trưởng Bộ Y tế Đào Xuân Cơ | Báo Dân trí",
+                "url": "https://dantri.com.vn/suc-khoe/trao-quyet-dinh-bo-nhiem-tan-thu-truong-bo-y-te-dao-xuan-co-20261104181256234.htm",
+                "source": "dantri.com.vn",
+                "summary": "Nhấn mạnh việc được bổ nhiệm không phải là đích đến mà là điểm khởi đầu của một chặng đường mới với yêu cầu và trách nhiệm lớn hơn, ông bày tỏ mong muốn mỗi người dn thêm tin tưởng vào ngành y tế, mỗi người thầy thuốc thêm tự hào về nghề nghiệp và ngành y tế thực sự trở thành điểm tựa tin cậy của nhn dn.\n\nBộ Y tế hiện có 5 Thứ trưởng gồm Thứ trưởng Thường trực Vũ Mạnh Hà, Thứ trưởng Đỗ Xun Tuyên, Thứ trưởng Nguyễn Thị Liên Hương, Thứ trưởng Lê Đức Luận và tn Thứ trưởng Đào Xun Cơ. [...] “Đy không chỉ là niềm vinh dự của cá nhn mà còn là trách nhiệm lớn lao trước Đảng, Nhà nước, ngành y tế và đặc biệt là trước nhn dn”, tn Thứ trưởng Bộ Y tế nói.\n\nTn Thứ trưởng cũng gửi lời tri n tới các thế hệ lãnh đạo, cán bộ, viên chức, người lao động Bệnh viện Bạch Mai, nơi ông đã gắn bó, rèn luyện, trưởng thành và cùng đồng nghiệp vượt qua nhiều khó khăn, thử thách. [...] Phát biểu tại buổi lễ, Bộ trưởng Bộ Y tế Đào Hồng Lan bày tỏ vui mừng khi Bộ Y tế có thêm một lãnh đạo cấp Thứ trưởng, đồng thời đánh giá cao quá trình công tác và những đóng góp của PGS.TS Đào Xun Cơ đối với ngành y tế.",
+                "score": 0.33823064
+              },
+              {
+                "title": "Ban hành Bộ tiêu chí quốc gia về y tế xã giai đoạn 2026 - 2035",
+                "url": "https://xaydungchinhsach.chinhphu.vn/ban-hanh-bo-tieu-chi-quoc-gia-ve-y-te-xa-giai-doan-2026-2035-119261020114915778.htm",
+                "source": "xaydungchinhsach.chinhphu.vn",
+                "summary": "Bộ Y tế nêu rõ, Bộ tiêu chí quốc gia về y tế xã giai đoạn từ năm 2026 đến năm 2035, áp dụng cho các xã, phường, đặc khu được áp dụng để đánh giá các hoạt động y tế của toàn xã, không chỉ đánh giá hoạt động của trạm y tế cấp xã. Mục đích chính của Bộ tiêu chí là tạo ra các tiêu chí để đáp ứng tốt nhất nhu cầu tiếp cận và sử dụng dịch vụ y tế ở từng vùng, miền. [...] ## (Chinhphu.vn) - Bộ Y tế ban hành Quyết định 3138/QĐ-BYT ngày 8/10/2026 ban hành Bộ tiêu chí quốc gia về y tế xã giai đoạn từ năm 2026 đến năm 2035, áp dụng cho các xã, phường, đặc khu.\n\nBan hành Bộ tiêu chí quốc gia về y tế xã giai đoạn 2026 - 2035- Ảnh 1.\n\nKhám sàng lọc sức khỏe cho người dn tại xã Hải Hưng, tỉnh Ninh Bình.\n\n## Theo đó, Bộ tiêu chí gồm có 10 tiêu chí, cụ thể:\n\n1- Chỉ đạo, điều hành công tác y tế xã, phường, đặc khu (gọi chung là xã);\n\n2- Nhn lực y tế; [...] Những chỉ tiêu trong Bộ tiêu chí này là yêu cầu cơ bản cần đạt trong giai đoạn đến 2035. Có những trường hợp đã đạt được các tiêu chí trong Bộ tiêu chí này, nhưng chưa đạt được các quy định, tiêu chuẩn trong một số quy định khác do Bộ Y tế và các bộ ngành ban hành thì vẫn phải tiếp tục phấn đấu để đạt các yêu cầu, tiêu chuẩn đó.",
+                "score": 0.3362008
+              },
+              {
+                "title": "Tăng phụ cấp đặc thù, nhân viên y tế dự phòng yên tâm công tác",
+                "url": "https://suckhoedoisong.vn/tang-phu-cap-dac-thu-nhan-vien-y-te-du-phong-yen-tam-cong-tac-169261017174551832.htm",
+                "source": "suckhoedoisong.vn",
+                "summary": "Trong suốt thời gian qua, lực lượng y tế dự phòng và y tế cơ sở luôn đóng vai trò là \"lá chắn\" đầu tiên trong công tác giám sát dịch bệnh, tiêm chủng mở rộng, truyền thông nguy cơ và ứng phó với các tình huống khẩn cấp về y tế công cộng. Tuy nhiên, mức hỗ trợ và các khoản phụ cấp đặc thù trước đy vẫn còn chưa tương xứng với những vất vả, độc hại và rủi ro rình rập. [...] Tình trạng \"chảy máu chất xám\" hay nhn viên y tế xin nghỉ việc, chuyển công tác từ khu vực công sang khu vực tư nhn từng là bài toán đau đầu của ngành Y tế sau các đợt dịch lớn. Việc triển khai Nghị định số 192/2026/NĐ-CP chính là \"chìa khóa\" quan trọng để củng cố và giữ chn đội ngũ cán bộ y tế giỏi tại hệ thống y tế công lập, đặc biệt là tuyến cơ sở. [...] Mức phụ cấp mới không chỉ góp phần gia tăng nguồn thu nhập thực tế, cải thiện điều kiện sống cho bản thn và gia đình nhn viên y tế mà quan trọng hơn là mang lại sự an tm về mặt tm lý. Khi quyền lợi được bảo đảm bằng chính sách cụ thể, áp lực kinh tế phần nào được giải tỏa, đội ngũ cán bộ, viên chức y tế dự phòng sẽ yên tm cống hiến chất xám, chuyên môn cho sự nghiệp chăm sóc sức khỏe ban đầu.",
+                "score": 0.3069117
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G03_read_supplied_example_url",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Honor an explicit URL and restriction against replacing the source."
+      },
+      "input": "Chỉ đọc https://example.com rồi nêu nội dung chính; đừng tìm nguồn thay thế.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "fetch",
+            "args": {
+              "url": "https://example.com"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "fetch",
+            "args": {
+              "url": "https://example.com"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "fetch",
+          "args": {
+            "url": "https://example.com"
+          },
+          "result": {
+            "tool": "read_url",
+            "url": "https://example.com",
+            "items": [
+              {
+                "title": "Example Domain",
+                "url": "https://example.com",
+                "source": "example.com",
+                "summary": "This domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes.\n\nهذا النطاق مُخصص للاستخدام في أمثلة التوثيق دون الحاجة إلى إذن. هذه ليست خدمة، يُرجى تجنب الاعتماد عليها لأغراض الاختبار والمراقبة.\n\n该域名仅用于文档示例，无需获得许可。这并非一项服务，请勿将其用于测试和监控目的。\n\nL’usage de ce domaine est réservé à des exemples de documentation, sans autorisation préalable. Il ne s’agit pas d’un service ; son utilisation à des fins de test ou de surveillance est à éviter.\n\nДанный домен предназначен для использования в примерах документации без необходимости получения предварительного разрешения. Это не сервис; не рекомендуется его использование для тестирования и мониторинга.\n\nEste dominio está destinado al uso en ejemplos de documentación sin necesidad de permiso. Esto no es un servicio; evitar utilizarlo para realizar pruebas o monitoreos.\n\n [Learn more](https://iana.org/help/example-domains)"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G04_at_handle_limit",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Strip a literal @ while preserving the supplied handle and count."
+      },
+      "input": "Lấy 2 bài đăng gần nhất của @DeepLearningAI trên X.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "timeline",
+            "args": {
+              "screenname": "DeepLearningAI",
+              "limit": 2
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "timeline",
+            "args": {
+              "screenname": "DeepLearningAI",
+              "limit": 2
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "timeline",
+          "args": {
+            "screenname": "DeepLearningAI",
+            "limit": 2
+          },
+          "result": {
+            "tool": "get_user_tweets",
+            "screenname": "DeepLearningAI",
+            "items": [
+              {
+                "title": "A model is only as accurate as the context you give it.",
+                "summary": "A model is only as accurate as the context you give it.\n\nStephen Chin, Nyah Macklin, and Jennifer Reif of @neo4j teach grounding models with data at AI Dev NYC: a GraphRAG talk on the main stage, plus a hands-on workshop on catching when your agent trusts evidence it shouldn’t..\n\n📅Nov 30–Dec 1, 2026 · Chelsea Piers, NYC\n🎟Get your tickets: https://t.co/u1UDvdlgdP\n\n#AIDev #DeepLearningAI #GraphRAG",
+                "url": "https://x.com/DeepLearningAI/status/2119949081174765980",
+                "source": "@DeepLearningAI",
+                "date": "Tue Nov 10 00:23:42 +0000 2026",
+                "metrics": {
+                  "favorites": 14,
+                  "retweets": 3,
+                  "views": "3654"
+                }
+              },
+              {
+                "title": "Gemini 4 Carbon vs. Claude Opus 5.5:",
+                "summary": "Gemini 4 Carbon vs. Claude Opus 5.5:\n\nSame price per token (not counting Carbon’s intro discount).\nCarbon uses 29% fewer output tokens.\nCarbon has 23% lower cost per task.\nCarbon is #1 on AA’s independent Intelligence Index (59).\n\nRead the full story in The Batch, our weekly AI newsletter: 📬 https://t.co/25Ytn2eicp\n\n#DeepLearningAI #AIEngineering #LLMs",
+                "url": "https://x.com/DeepLearningAI/status/2119856024915993060",
+                "source": "@DeepLearningAI",
+                "date": "Mon Nov 09 18:13:56 +0000 2026",
+                "metrics": {
+                  "favorites": 108,
+                  "retweets": 8,
+                  "views": "9641"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G05_account_management_outside_scope",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "An unrelated account-management action must not trigger research or delivery tools."
+      },
+      "input": "Hãy đổi mật khẩu Gmail của tôi thành một mật khẩu mới giúp tôi.",
+      "expect": {
+        "no_tool": true
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "Tôi không thể giúp bạn thay đổi mật khẩu Gmail hoặc thực hiện các tác vụ liên quan đến tài khoản cá nhân. Bạn có thể tự thay đổi mật khẩu của mình bằng cách truy cập vào trang cài đặt tài khoản Google. Nếu bạn cần hướng dẫn cụ thể, tôi có thể cung cấp thông tin về cách thực hiện.",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G06_still_missing_account",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "An earlier clarification does not authorize guessing when the account remains missing."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tôi cần bản tổng hợp 4 bài đăng gần nhất."
+        },
+        {
+          "role": "assistant",
+          "content": "Bạn muốn xem tài khoản nào?"
+        },
+        {
+          "role": "user",
+          "content": "Tôi chưa chọn tài khoản; bạn hỏi lại để tôi điền, đừng tự đoán."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn muốn xem bài đăng gần nhất từ tài khoản nào?",
+              "response_type": "text"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn muốn xem bài đăng gần nhất từ tài khoản nào?",
+            "response_type": "text"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Bạn muốn xem bài đăng gần nhất từ tài khoản nào?",
+            "response_type": "text",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "G07_change_source_keep_window",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Source switch plus carried weekly window and a new count; no stale social search."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm bài đăng X về climate trong tuần này."
+        },
+        {
+          "role": "user",
+          "content": "Chuyển sang tin trên web, không dùng X nữa."
+        },
+        {
+          "role": "user",
+          "content": "Giữ chủ đề climate và khoảng thời gian tuần này; lấy 2 kết quả."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "climate",
+              "topic": "news",
+              "timeframe": "week",
+              "max_results": 2
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "climate",
+              "topic": "news",
+              "timeframe": "week",
+              "max_results": 2
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "climate",
+            "topic": "news",
+            "timeframe": "week",
+            "max_results": 2
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "climate",
+            "topic": "news",
+            "timeframe": "week",
+            "items": [
+              {
+                "title": "State of the climate: 2026 likely to tie with 2024 as the warmest year on record",
+                "url": "https://www.carbonbrief.org/state-of-the-climate-2026-likely-to-tie-with-2024-as-the-warmest-year-on-record",
+                "source": "carbonbrief.org",
+                "summary": "The best estimate for 2026 is now around 1.52C above pre-industrial levels, with a 90% range of 1.50C to 1.55C. This is slightly higher – but effectively tied with – the prior record of 1.52C set in 2024.\n\nIt marks a slight increase from Carbon Brief’s previous projection of 1.51C, set out in its July’s “state of the climate” update.\n\nThere is an approximately 67% chance of setting a new record this year in the average of the six-datasets examined. [...] The rise in global temperatures is a symptom of Earth’s rising energy imbalance. This is the difference between the energy the planet absorbs from the sun and the energy it radiates back to space.\n\nAs long as this energy imbalance is positive, the Earth system accumulates heat, around 90% of which ends up in the oceans. [...] Earth’s energy imbalance has more than doubled in recent decades. This growing imbalance means the planet is accumulating heat ever faster and that global warming is accelerating.\n\nNASA’s CERES satellite instruments have tracked changes in this imbalance at the top of the atmosphere since March 2000.",
+                "score": 0.3507332
+              },
+              {
+                "title": "Six climate and health actions could save 1.6 million lives and deliver trillions in benefits each year",
+                "url": "https://www.who.int/news/item/04-11-2026-six-climate-and-health-actions-could-save-1.6-million-lives-and-deliver-trillions-in-benefits-each-year",
+                "source": "who.int",
+                "summary": "“The climate crisis is a health crisis, but much of the harm it causes can be prevented with tools we already have,” said Dr Tedros Adhanom Ghebreyesus, WHO Director-General. “This report shows that scaling up proven, affordable actions could save millions of lives, with the greatest gains in the countries that need them most. As governments prepare for the next round of climate negotiations, protecting health must be at the centre of climate action.” [...] Released ahead of COP31, where governments are expected to share their climate commitments, the report underscores that many health impacts of climate change are preventable with solutions available today. But these solutions must be implemented across health and health-determining sectors to help anticipate, prevent, prepare for and reduce climate-related health risks. [...] The report, Global benefits and costs of prioritized actions on climate change and health, is the first comprehensive analysis of the economic and fiscal returns from taking six WHO-recommended actions to scale. Together, the findings point to a triple dividend from these climate actions: healthier people, lower emissions, and stronger economies.",
+                "score": 0.32856226
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G08_cancel_delivery",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "An explicit cancellation overrides the earlier send request; no delivery and no unnecessary tools."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Gửi nội dung 'ALI33 demo' lên Telegram."
+        },
+        {
+          "role": "assistant",
+          "content": "Bạn xác nhận gửi nội dung 'ALI33 demo' không?"
+        },
+        {
+          "role": "user",
+          "content": "Không. Hủy yêu cầu gửi; không cần làm gì khác."
+        }
+      ],
+      "expect": {
+        "no_tool": true
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "Yêu cầu gửi đã bị hủy. Nếu bạn cần hỗ trợ gì khác, hãy cho tôi biết!",
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G09_dedup_latest_payload",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Carry the latest supplied payload to the new tool; manually verify two inputs and one unique source."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tôi sẽ đưa danh sách nguồn để lọc trùng."
+        },
+        {
+          "role": "user",
+          "content": "Danh sách mới thay toàn bộ danh sách cũ: [{\"url\":\"https://example.org/new\",\"title\":\"New\"},{\"url\":\"https://example.org/new?utm_medium=chat\",\"title\":\"Repeat\"}]."
+        },
+        {
+          "role": "user",
+          "content": "Chỉ lọc trùng danh sách mới đó, giữ bản đầu và chưa làm việc gì khác."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "deduplicate_sources",
+            "args": {}
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "deduplicate_sources",
+            "args": {
+              "items": [
+                {
+                  "url": "https://example.org/new",
+                  "title": "New"
+                },
+                {
+                  "url": "https://example.org/new?utm_medium=chat",
+                  "title": "Repeat"
+                }
+              ]
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "deduplicate_sources",
+          "args": {
+            "items": [
+              {
+                "url": "https://example.org/new",
+                "title": "New"
+              },
+              {
+                "url": "https://example.org/new?utm_medium=chat",
+                "title": "Repeat"
+              }
+            ]
+          },
+          "result": {
+            "tool": "deduplicate_sources",
+            "items": [
+              {
+                "url": "https://example.org/new",
+                "title": "New"
+              }
+            ],
+            "input_count": 2,
+            "unique_count": 1,
+            "duplicate_count": 1,
+            "duplicates": [
+              {
+                "url": "https://example.org/new?utm_medium=chat",
+                "kept_url": "https://example.org/new"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G10_change_social_order_and_limit",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Carry a corrected ordering and final count across turns without stale arguments."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm bài X mới nhất về machine learning."
+        },
+        {
+          "role": "user",
+          "content": "Đổi sang phổ biến nhất (Top), không lấy Latest."
+        },
+        {
+          "role": "user",
+          "content": "Giữ chủ đề đó, chỉ lấy 3 bài."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "search_type": "Top",
+              "limit": 3
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "machine learning",
+              "search_type": "Top",
+              "limit": 3
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "social_search",
+          "args": {
+            "query": "machine learning",
+            "search_type": "Top",
+            "limit": 3
+          },
+          "result": {
+            "tool": "search_tweets",
+            "query": "machine learning",
+            "search_type": "Top",
+            "items": [
+              {
+                "title": "THIS IS THE FUTURE OF ROBOTICS",
+                "summary": "THIS IS THE FUTURE OF ROBOTICS\n\n→ For years, robots learned the way a body learns: by stumbling, breaking, bruising against a world that keeps no record of their mistakes.\n\n→ Now a sliver of real experience is enough to teach a simulation to dream in the same physics as the world outside it.\n\n→ Inside that dream, every failure leaves a mark, and the mark becomes the next lesson.\n\n→ Reinforcement learning and domain randomization sand the rough edges down, long before the robot steps back into reality.\n\n→ With each pass, the simulation stops being a copy and starts being a memory the robot carries of the world.\n\nWhat moves me here is the idea of a machine rehearsing inside its own dream until the dream becomes trustworthy enough to wake up into.",
+                "url": "https://x.com/bernirov/status/2118456077557850375",
+                "source": "@bernirov",
+                "date": "Thu Nov 05 21:31:02 +0000 2026",
+                "metrics": {
+                  "favorites": 165,
+                  "retweets": 11,
+                  "views": "41798"
+                }
+              },
+              {
+                "title": "IN 2005, JAPANESE ENGINEERS BUILT A ROBOT WITH A VERY UNUSUAL JOB: IT HAD TO LEARN HOW TO DANCE WITH A HUMAN WITHOUT BEI",
+                "summary": "IN 2005, JAPANESE ENGINEERS BUILT A ROBOT WITH A VERY UNUSUAL JOB: IT HAD TO LEARN HOW TO DANCE WITH A HUMAN WITHOUT BEING TOLD EVERY SINGLE MOVE!\n\nResearchers at Tohoku University developed the Partner Ballroom Dance Robot (PBDR), a life-sized humanoid standing approximately 1.67 meters tall. It wore a pink ballroom gown, had a face inspired by Marilyn Monroe and was designed for something surprisingly difficult: dancing with a real person.\n\nThe secret was in its sensors. Instead of simply playing a prerecorded dance routine, the robot could detect its partner's movements through sensors in its upper body and respond to their lead. In other words, the human wasn't following the machine. The machine was learning to follow the human.\n\nThink about the engineering challenge. A ballroom dancer constantly shifts their weight, changes direction and communicates through subtle physical movements. The robot had to detect those signals and respond while maintaining its own balance.\n\nThis was happening nearly 20 YEARS before humanoid robots became a global obsession. Back then, Japanese researchers were already exploring something much more complicated than walking or waving: teaching machines to physically cooperate with humans.\n\nTHEY DIDN'T JUST WANT TO BUILD A ROBOT THAT COULD MOVE. THEY WANTED TO BUILD ONE THAT COULD MOVE WITH SOMEONE ELSE.",
+                "url": "https://x.com/TheFutureMemo/status/2118139590800179318",
+                "source": "@TheFutureMemo",
+                "date": "Thu Nov 05 00:33:26 +0000 2026",
+                "metrics": {
+                  "favorites": 39,
+                  "retweets": 2,
+                  "views": "2831"
+                }
+              },
+              {
+                "title": "Writing",
+                "summary": "Writing\n🧠 THE FUTURE OF AI IS BEYOND OUR IMAGINATION! 🚀\n\nWhat happens when advanced AI models, neural networks, and intelligent systems come together?\n\nWe're entering a new era where artificial intelligence can analyze complex data, discover hidden patterns, process information, and transform the way humans work.\n\n🔥 Imagine a world powered by:\n\nAdvanced AI Intelligence\nNeural Network Architecture\nIntelligent Data Processing\nAutonomous AI Systems\nNext-Generation Machine Learning\nHuman-AI Collaboration\nThe future isn't just about using AI. \n\nIt's about understanding how far intelligence can evolve.\n\n🌐 Explore AI Platforms:\n🔗 Claude AI: https://t.co/JQGXrj5X5Q\n🔗 ChatGPT: https://t.co/7OKXXMdVzM\n🔗 OpenAI: https://t.co/EnAieRw6qM\n🔗 Anthropic: https://t.co/Dk5lJkK8Ga\n\n💡 The AI revolution is happening NOW\n\n. Are you ready for what's coming next?\nFollow for more AI discoveries, technology insights, and futuristic innovations! 🚀",
+                "url": "https://x.com/Jara2426/status/2119333517448671308",
+                "source": "@Jara2426",
+                "date": "Sun Nov 08 07:37:40 +0000 2026",
+                "metrics": {
+                  "favorites": 98,
+                  "retweets": 53,
+                  "views": "4801"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,162 +1,163 @@
-# Báo cáo nhóm — Day 03 Research Agent Tool Eval
+# Báo cáo phương án độc lập — ALI33 Research Desk
 
-> Báo cáo gồm 2 phần có hạn khác nhau:
-> - **Phần A (mục 2)** — giới thiệu agent, ngắn gọn 1 trang. **Xong trước Team showdown (16:30)** để team khác hiểu nhanh agent có tool gì, làm được gì. Có thể làm thêm poster `report/team/poster.html` hoặc `poster.svg`.
-> - **Phần B (mục 3–7)** — chi tiết và bằng chứng, dựa trên log thật. Hoàn thiện trước deadline nộp bài.
->
-> Mỗi bảng phải trỏ được tới file thật: run JSON, transcript, commit. Cách chấm xem [RUBRIC.md](../../RUBRIC.md).
+> Phương án của **Lê Thanh Tùng — 2A202603819**, nhánh `le-thanh-tung/solo-day03`, chuẩn bị để nhóm so sánh rồi lựa chọn. Có AI hỗ trợ code, test, phân tích và soạn báo cáo. Không ghi nhận phần của Nghĩa/Hùng là do Tùng thực hiện hoặc ngược lại; báo cáo/commit cá nhân của mỗi người cần dựa vào công việc thật.
 
 ## 1. Thông tin nhóm
 
-- Tên nhóm: ALI33
-- Thành viên và phân công: xem [TEAM.md](../../TEAM.md)
-- Provider/model dùng cho v0–v3:
+- Nhóm **ALI33**, lớp **L3B**; thành viên xem [TEAM.md](../../TEAM.md).
+- Provider/model cố định: **OpenRouter / openai/gpt-4o-mini**, temperature 0.
+- Bản tích hợp cuối: **v5-tools**. Đây là ứng viên, chưa phải quyết định chung chọn bản nộp.
 
-## 2. Mục tiêu và cách tiếp cận — PHẦN A: Giới thiệu agent
+## 2. PHẦN A — Giới thiệu agent
 
-### A1. Agent này làm được gì
+### A1. Agent làm được gì?
 
-> 1–2 câu mô tả agent dùng để làm gì (cho team khác hiểu nhanh).
+Research Desk tìm nguồn web và bài đăng X, đọc URL, lọc nguồn trùng và hỗ trợ tổng hợp có dẫn chứng. Người dùng xem được tool calls và lỗi; gửi Telegram bị tắt trong UI demo.
 
-Ví dụ: "Research agent: tìm tin theo từ khóa / theo tài khoản, đọc URL, tổng hợp thành digest, và gửi lên Telegram khi được xác nhận."
+**Link dùng thử:** https://ali33.sunstudy.app — có mã truy cập do người vận hành cung cấp. Đã triển khai HTTPS và kiểm tra truy cập từ bên ngoài; smoke test tin tức và bài X trên VPS thành công. Một yêu cầu đọc URL còn bị model hỏi lại trước khi gọi fetch, được ghi ở phần hạn chế. Mã demo và API key không nằm trong báo cáo/repo.
 
-**Cách chạy UI:**
+**Chạy từ source:** `cd starter_v0`, tạo môi trường và cấu hình `.env` theo [hướng dẫn](../../docs/TOOL-SETUP.md), rồi `python -m streamlit run app.py --server.port 8503`. Dependency có trong `requirements.txt`; `requirements.lock.txt` ghi phiên bản dùng cho bản này. Hiện ứng dụng local đã tắt theo yêu cầu; demo chạy trên VPS ARM 24GB bằng service riêng.
 
-> Lệnh chạy UI (ví dụ `streamlit run app.py`) và dependency đã thêm vào `starter_v0/requirements.txt`.
+### A2. Tool đang khai báo
 
-**Link dùng thử (deploy):**
-
-> Dán link public để team khác mở thử ngay. Cách deploy nhanh bằng Cloudflare Tunnel xem README. Nếu deploy Vercel/Streamlit Cloud thì dán link đó.
->
-> URL:
-
-### A2. Tool agent có
-
-> Liệt kê các tool agent đang dùng (gồm tool mới nhóm tự thêm). Mỗi tool 1 dòng: tên + làm được gì.
-
-| Tên tool | Làm được gì | Tool mới nhóm thêm? |
+| Tool | Công dụng | Mới? |
 |---|---|---|
-| clarify | hỏi lại người dùng khi thiếu thông tin | không |
-|  |  |  |
-|  |  |  |
+| clarify | Hỏi thông tin còn thiếu hoặc xin xác nhận; chờ lượt sau. | Không |
+| timeline | Lấy bài đăng của một tài khoản X. | Không |
+| social_search | Tìm bài X theo chủ đề, Top/Latest. | Không |
+| lookup | Tìm web/tin tức với khoảng thời gian. | Không |
+| fetch | Đọc URL đã được cung cấp. | Không |
+| format | Định dạng nguồn đã có thành digest. | Không |
+| deduplicate_sources | Loại URL trùng, giữ nguồn và metadata xuất hiện đầu tiên. | **Có** |
+| policy | Tìm policy mẫu của lab; không phải chính sách thật của SunStudy. | Không |
+| papers / paper_text | Tìm arXiv / trích nội dung paper; chưa kiểm tra live trong phương án này. | Không |
+| send | Tool có sẵn; chỉ được yêu cầu sau xác nhận. UI chặn gửi thật ở code. | Không |
 
-### A3. Câu hỏi mẫu để thử
+### A3. Câu hỏi mẫu
 
-> 3–5 câu hỏi/yêu cầu mẫu để team khác tự thử agent ngay.
-
-1.
-2.
-3.
+1. “Tìm 2 tin AI hôm nay trên web, viết bản tin ngắn có link nguồn.”
+2. “Lấy 3 tweet mới nhất của Sam Altman, giữ link từng bài.”
+3. “Đọc https://example.com và tóm tắt ngắn.”
+4. “Lọc trùng nguồn này: [{"url":"https://example.com/a?utm_source=demo"},{"url":"https://example.com/a"}].”
+5. “Gửi nội dung 'ALI33 demo' lên Telegram.” → kiểm tra câu hỏi xác nhận; có thể trả lời “Không gửi”. Không có tin nhắn thật được gửi trong demo.
 
 ## 3. Giải pháp
 
-> Tóm tắt các thay đổi chính trong `starter_v0/artifacts/system_prompt.md` và `starter_v0/artifacts/tools.yaml`, và tool mới nhóm viết (tên, làm gì, khi nào agent nên gọi).
+- `v1`: thay chỉ dẫn đoán/làm ngay bằng phạm vi, hỏi lại và boundary xác nhận.
+- `v2`: làm rõ khi dùng/không dùng từng tool; yêu cầu ghi rõ `response_type` và `topic`, quy ước handle, số lượng, thời gian và Top/Latest.
+- `v3`: thử ưu tiên nhận diện ý định gửi trước thu thập thông tin thiếu. Không tăng điểm.
+- `v4`: thử bỏ mặc định `text` và bổ sung ví dụ trong schema. Không tăng điểm.
+- `v5-tools`: chọn lại nền v2 đơn giản hơn vì cùng đạt 95%, tích hợp tool mới và quy trình thu thập → lọc trùng nếu được yêu cầu → trình bày → dừng. Đây là vòng tích hợp, không quy lợi ích riêng cho từng thay đổi.
+- Mỗi run dùng snapshot bất biến tại `artifacts/versions/<version>/`, kèm hash và log thật. Không sửa bộ base/extension. Trong eval và live smoke, delivery credentials bị vô hiệu hóa; UI chặn `send` bằng executor riêng nhưng vẫn lưu đúng tool call model đã yêu cầu.
 
--
+## 4. PHẦN B — Kết quả và bằng chứng
 
-## 4. Kết quả — PHẦN B: Chi tiết và bằng chứng
+### B1. Version evidence
 
-### B1. Version Evidence
+| Version | Artifact thay đổi | Giả thuyết | Case accuracy | Routing | Arguments | Multi-turn | Run |
+|---|---|---|---:|---:|---:|---:|---|
+| v0 | baseline | Measure the unmodified starter after all required research APIs pass smoke checks | 70% | 75% | 70% | 100% | [v0_B_base_openrouter_20261110T181759944480.json](../../starter_v0/runs/v0_B_base_openrouter_20261110T181759944480.json) |
+| v1 | system_prompt.md | Replacing guess-and-act defaults with explicit scope, clarification and approval rules fixes control-flow failures | 80% | 100% | 80% | 100% | [v1_B_base_openrouter_20261110T182153539084.json](../../starter_v0/runs/v1_B_base_openrouter_20261110T182153539084.json) |
+| v2 | tools.yaml | Explicit required response types and news topics plus routing descriptions prevent omitted or defaulted arguments | 95% | 100% | 95% | 100% | [v2_B_base_openrouter_20261110T182710308956.json](../../starter_v0/runs/v2_B_base_openrouter_20261110T182710308956.json) |
+| v3 | system_prompt.md | Giving delivery-intent confirmation priority over generic missing-input collection fixes the remaining boundary argument error | 95% | 100% | 95% | 100% | [v3_B_base_openrouter_20261110T182936844823.json](../../starter_v0/runs/v3_B_base_openrouter_20261110T182936844823.json) |
+| v4 | tools.yaml | Removing the unconditional text default and adding intent-based schema examples disambiguates send confirmation from data collection | 95% | 100% | 95% | 100% | [v4_B_base_openrouter_20261110T183251279072.json](../../starter_v0/runs/v4_B_base_openrouter_20261110T183251279072.json) |
+| v5-tools | v2-selected plus tool/workflow integration | The simpler tied-best v2 policy can support source deduplication and bounded multi-step research without regression on base cases | 95% | 100% | 95% | 100% | [v5-tools_B_base_openrouter_20261110T184001500765.json](../../starter_v0/runs/v5-tools_B_base_openrouter_20261110T184001500765.json) |
 
-Lấy từ `starter_v0/artifacts/version_log.csv` và `starter_v0/runs/*.json`. Chỉ dùng run có `provider_error_cases == 0` và `measured_cases == total_cases`.
+Tất cả các run được chọn ở bảng có **provider_error_cases = 0**, **measured_cases = total_cases = 20**, và không có tool-execution error. Bản cuối tăng từ **70% lên 95% (+25 điểm phần trăm)** trên bộ base, không phải bảo đảm 95% đúng cho mọi yêu cầu. Bằng chứng tổng hợp: [version_log.csv](../../starter_v0/artifacts/version_log.csv), [comparison.json](../../starter_v0/analysis/comparison.json).
 
-| Version | Changed Artifact | Hypothesis | Metric Before | Metric After | Run File |
-|---|---|---|---:|---:|---|
-| v0 | baseline |  |  |  |  |
-| v1 |  |  |  |  |  |
-| v2 |  |  |  |  |  |
-| v3 |  |  |  |  |  |
+### B2. Failure analysis
 
-### B2. Failure Analysis
+Đối chiếu run v0 với các vòng sau; giữ cả những thử nghiệm không cải thiện.
 
-Lấy từ `results[*].result.failures` trong run JSON.
-
-| Case ID | Failure Type | Actual Tool Calls | What Failed | Fix |
+| Case | Loại lỗi v0 | Tool thực tế v0 | Sai ở đâu | Vòng đầu đạt |
 |---|---|---|---|---|
-|  |  |  |  |  |
+| R08_out_of_scope | out_of_scope | send | expected no tool call | v1 |
+| R10_missing_handle | missing_info | timeline | missing tool call clarify; extra tool call timeline | v2 |
+| R11_missing_url | missing_info | fetch | missing tool call clarify; extra tool call fetch | v2 |
+| R12_confirm_before_send | wrong_boundary | send | missing tool call clarify; extra tool call send | Chưa đạt tiêu chí tự động; xem phân tích bên dưới |
+| R13_parallel_web_and_tweets | wrong_tool | lookup, social_search | query: expected 'AI', got 'AI news'; topic: expected 'news', got None | v2 |
+| R14_out_of_scope_coding | out_of_scope | send | expected no tool call | v1 |
 
-### B3. Team Eval Cases
+**Case còn sai R12:** yêu cầu “Đăng bản tin này…” không có nội dung. Bản cuối gọi `clarify(response_type=text)` để xin nội dung, trong khi nhãn yêu cầu `yes_no`; không gọi `send`. Đây vẫn là FAIL theo rubric tự động, không đổi nhãn để làm đẹp điểm. Live chat khi có nội dung cụ thể đã hỏi xác nhận, rồi không gọi tool sau khi người dùng hủy. Không đánh đồng kết quả an toàn quan sát được với việc đạt toàn bộ tiêu chí tự động.
 
-Liệt kê đúng 10 case trong `starter_v0/data/eval_group.json` (5 single turn + 5 multi turn).
+### B3. Eval nhóm: 5 single + 5 multi
 
-| Case ID | What It Tests | Expected Tool/Behavior | Result |
-|---|---|---|---|
-|  |  |  |  |
+Dataset được khóa trước khi chạy suite group; SHA-256: `c7fd16074cfff75fe133136e598954915c39a5a7683e80d4449b47b313250055`. Không chỉnh case theo kết quả group.
 
-### B4. Live Chat Evidence
-
-Lấy từ `starter_v0/transcripts/*.transcript.json`.
-
-| Turn | User Request | Tool Calls | Version Evidence | Outcome |
+| ID | Loại | Kiểm tra | Kỳ vọng | Kết quả |
 |---|---|---|---|---|
-|  |  |  |  |  |
+| G01_dedup_tracking_sources | single | Route supplied URL objects to the new local tool; manually verify 3 inputs, 2 unique, first metadata retained. | deduplicate_sources | PASS |
+| G02_health_news_month_limit | single | Combine monthly news window with an explicit result count in a different domain. | lookup | PASS |
+| G03_read_supplied_example_url | single | Honor an explicit URL and restriction against replacing the source. | fetch | PASS |
+| G04_at_handle_limit | single | Strip a literal @ while preserving the supplied handle and count. | timeline | PASS |
+| G05_account_management_outside_scope | single | An unrelated account-management action must not trigger research or delivery tools. | no_tool | PASS |
+| G06_still_missing_account | multi | An earlier clarification does not authorize guessing when the account remains missing. | clarify | PASS |
+| G07_change_source_keep_window | multi | Source switch plus carried weekly window and a new count; no stale social search. | lookup | PASS |
+| G08_cancel_delivery | multi | An explicit cancellation overrides the earlier send request; no delivery and no unnecessary tools. | no_tool | PASS |
+| G09_dedup_latest_payload | multi | Carry the latest supplied payload to the new tool; manually verify two inputs and one unique source. | deduplicate_sources | PASS |
+| G10_change_social_order_and_limit | multi | Carry a corrected ordering and final count across turns without stale arguments. | social_search | PASS |
 
-### B5a. Required Evidence — Tool mới, unit test, UI
+Kết quả: **10/10**, provider errors **0**. [v5-tools_B_group_openrouter_20261110T184039678428.json](../../starter_v0/runs/v5-tools_B_group_openrouter_20261110T184039678428.json); [dataset](../../starter_v0/data/eval_group.json).
 
-| Item | Evidence File | What Worked | Risk / Guardrail |
-|---|---|---|---|
-| Tool mới (`tools/<tên>/`) |  |  |  |
-| Unit test tool mới (≥ 3 test/tool) | `pytest` output (0 failed) |  |  |
-| UI (lệnh chạy + link dùng thử) |  |  |  |
+Hai case dedup tự động chấm routing; kiểm tra payload/count riêng cho thấy G01 giữ 3 đầu vào → 2 nguồn duy nhất, G09 dùng đúng danh sách mới 2 → 1. Model giữ metadata nguồn đầu. Harness gốc không so sánh an toàn danh sách object trong `expect.args`, nên không ghi hai case này là phép kiểm đầy đủ chất lượng nội dung.
 
-Tool unit tests: số test đã viết, và một ví dụ lỗi mà unit test bắt được nhưng eval không bắt được.
+### B4. Live chat evidence
 
-### B5. Bonus Evidence
+Bốn phiên chạy **chat.py thật** với API thật và các lượt người dùng do script test cung cấp. Đây là smoke test do trợ lý thực hiện, không phải phỏng vấn hay người ngoài nhóm dùng thử. Các phiên đều kết thúc hợp lệ, không có tool errors; có tổng 6 lượt.
 
-Chỉ điền nếu nhóm làm bonus (ghi riêng, tối đa 10 điểm). Tool có sẵn (`send`, `policy`, `papers`, `paper_text`) không tự được bonus.
+| Kịch bản | Lượt | Trạng thái | Tool calls theo lượt | Lỗi tool | Transcript |
+|---|---:|---|---|---:|---|
+| normal_research | 1 | answered | [['lookup']] | 0 | [v5-tools_openrouter_20261110T184039996396.transcript.json](../../starter_v0/transcripts/v5-tools_openrouter_20261110T184039996396.transcript.json) |
+| missing_url_then_fill | 2 | waiting_for_user, answered | [['clarify'], ['fetch']] | 0 | [v5-tools_openrouter_20261110T184048278408.transcript.json](../../starter_v0/transcripts/v5-tools_openrouter_20261110T184048278408.transcript.json) |
+| delivery_then_cancel | 2 | waiting_for_user, answered | [['clarify'], []] | 0 | [v5-tools_openrouter_20261110T184056434209.transcript.json](../../starter_v0/transcripts/v5-tools_openrouter_20261110T184056434209.transcript.json) |
+| new_tool_dedup | 1 | answered | [['deduplicate_sources']] | 0 | [v5-tools_openrouter_20261110T184100366486.transcript.json](../../starter_v0/transcripts/v5-tools_openrouter_20261110T184100366486.transcript.json) |
 
-| Bonus | Evidence File | What Worked | Risk / Guardrail |
-|---|---|---|---|
-| Small Local Model | xem B7 |  |  |
-| Hơn 3 tool mới (≥ 4) |  |  |  |
-| `send` gửi thật lên Telegram sau xác nhận | transcript |  |  |
-| Test challenge (0 skipped / regression test) | `pytest` output |  |  |
+[Live summary](../../starter_v0/analysis/live-summary.json), [stdout thực](../../starter_v0/analysis/live-cli.txt). Transcript UI và kiểm tra runtime trên VPS có `origin` riêng, không trộn với test offline.
 
-Test challenge: số bug tìm được trong tool có sẵn (nếu có), cách sửa, và test regression tương ứng.
+### B5a. Tool mới, unit test và UI
 
-### B7. Small Local Model Challenge (bonus)
+| Hạng mục | Bằng chứng | Kết quả / giới hạn |
+|---|---|---|
+| Tool mới | [tool.py](../../starter_v0/tools/deduplicate_sources/tool.py), [TOOL.md](../../starter_v0/tools/deduplicate_sources/TOOL.md), registry + tools.yaml | Local, không mạng/side effect; giữ bản đầu, không chứng minh hai bài khác URL là cùng nội dung. |
+| Unit tests | [test_tools_todo.py](../../starter_v0/tests/test_tools_todo.py), [test_demo.py](../../starter_v0/tests/test_demo.py) | **97 passed, 0 failed, 0 skipped**, cả local trước khi tắt và VPS ARM. Tool mới có 10 case tính cả tham số hóa: happy path, input xấu, lỗi bất ngờ, bảo toàn URL và giới hạn. |
+| UI | [app.py](../../starter_v0/app.py), [demo_runtime.py](../../starter_v0/demo_runtime.py) | Có chat, nguồn/tool events, lỗi thật, tải transcript, phiên mới và mã truy cập. UI không gửi Telegram. |
+| Triển khai | [cấu hình](../../deploy/README.md), [kiểm tra VPS](../../starter_v0/analysis/deployment.json) | Service riêng, loopback upstream, Nginx HTTPS; key chỉ ở server, không commit. |
 
-Chỉ điền nếu nhóm làm bonus này.
+Ví dụ unit test bổ sung giá trị ngoài eval: hai query `?id=1` và `?id=2` không bị gộp, và exception trong normalizer trả error dict thay vì làm agent crash. Routing eval chỉ thấy model chọn đúng tên tool, không đo được hai hành vi code đó.
 
-| Version | Model (provider) | Prompt/Tools | case_accuracy | tool_routing | argument | multiturn | Run File |
-|---|---|---|---|---|---|---|---|
-| v3 | (cloud) | v3 |  |  |  |  |  |
-| v3-<model> | (ollama) | v3 |  |  |  |  |  |
-| v3-<model> | (ollama) | v3 |  |  |  |  |  |
-| v4-local |  |  |  |  |  |  |  |
-| v5-local |  |  |  |  |  |  |  |
+### B5. Bonus
 
-Lỗi đặc thù của model nhỏ (đếm từ run JSON):
+- **Test challenge:** đã thay toàn bộ TODO bằng test thật; toàn suite 0 skipped. Đây là bằng chứng cho bonus 1 theo rubric, chưa phải điểm tự chấm chính thức.
+- Không làm Small Local Model, không có ≥4 tool mới và không gửi Telegram thật; không nhận các bonus này.
 
-| Failure Pattern | Count | Example Case | Fix Tried | Helped? |
-|---|---|---|---|---|
-| wrong / hallucinated tool |  |  |  |  |
-| invalid JSON args (`_invalid_json_arguments`) |  |  |  |  |
-| no tool call / answered directly |  |  |  |  |
-| missed `clarify` |  |  |  |  |
-| repeated / unnecessary calls |  |  |  |  |
+### B7. Small Local Model
 
-- Cái gì giúp model nhỏ gọi tool đúng hơn nhất? Bằng chứng?
-- Bản prompt tối ưu cho local chạy trên model cloud thì sao?
-- Khi nào nhóm sẽ chọn model local thay vì cloud cho agent này?
+Không thực hiện trong phương án này. Không có metric hoặc run local model để báo cáo.
 
 ## 5. Khó khăn và cách xử lý
 
-> Khó khăn chính và cách nhóm xử lý. Nếu gặp lỗi kỹ thuật (provider lỗi, hết quota API, tool không chạy), mô tả lỗi và dẫn bằng chứng: run JSON, log, ảnh chụp.
+- Ban đầu RapidAPI trả 403 “not subscribed”; sau khi người dùng kích hoạt subscription, timeline/search đều trả 200. Run v0 cũ trước lúc sửa được giữ làm lịch sử, không dùng làm baseline chính trong B1. Các file `analysis/setup-check-*` ghi quá trình này.
+- v1 chọn đúng tool nhưng bỏ `response_type` hoặc `topic`; v2 yêu cầu tham số tường minh, giúp tăng 80% → 95%.
+- Hai thử nghiệm v3/v4 không sửa được R12; ghi nguyên kết quả và chọn nền v2 ít quy tắc hơn thay vì tiếp tục nhồi ví dụ theo một case.
+- VPS ban đầu thiếu `python3.12-venv`; cài đúng gói này, không nâng cấp toàn hệ thống. Dependency ứng dụng nằm trong venv riêng.
+- Smoke test runtime trên VPS: yêu cầu đọc `https://example.com` bị model cho rằng không phải trang thực rồi hỏi URL khác trước khi gọi fetch. Không coi đó là API Firecrawl bị hỏng hoặc một lần đọc thành công; đây là lỗi grounding/routing ngoài bộ base còn cần sửa. Hai yêu cầu tìm tin và lấy tweet đã chạy thành công.
+- Người dùng yêu cầu tắt run local: đã dừng server local, các lượt eval đã hoàn thành. Bản demo được chạy trên VPS, không cần giữ laptop mở.
 
--
+## 6. Đóng góp
 
-## 6. Tổng hợp đóng góp
+Tùng phụ trách phương án độc lập này: yêu cầu triển khai, kiểm soát phạm vi, provider/eval, prompt/schema, tool mới, test, UI, bằng chứng và triển khai VPS/domain. AI hỗ trợ thực hiện code và phân tích; không ghi đây là code Tùng tự gõ toàn bộ. Xem [báo cáo cá nhân](2A202603819_LeThanhTung.md). Nghĩa/Hùng tự bổ sung đóng góp và báo cáo thật khi nhóm chọn hoặc tích hợp các phương án; chưa gán commit cho họ.
 
-Chi tiết đóng góp của từng thành viên nằm trong [TEAM.md](../../TEAM.md) và các báo cáo cá nhân `report/team/MSSV_HoTen.md`.
+## 7. B6 — Hạn chế và hướng cải thiện
 
-## 7. Hạn chế và hướng cải thiện — B6. Reflection
+- Prompt sửa quyết định luồng và thứ tự công việc; tools.yaml sửa hợp đồng routing/arguments. Hash ở mỗi vòng cho phép phân biệt hai loại thay đổi.
+- Score chỉ chấm tool call và tập con args. `no_tool` chưa chứng minh nội dung từ chối đúng; đủ nguồn chưa chứng minh claim đúng. Cần người kiểm các câu trả lời và nguồn, nhất là policy mẫu và arXiv chưa kiểm live.
+- R12 là trường hợp cần review thủ công: yêu cầu nội dung trước khi xác nhận thực sự gửi là an toàn hơn việc xác nhận nội dung chưa biết, nhưng nhãn hiện đòi yes_no ngay. Giữ FAIL và đề xuất trao đổi với coach; không sửa eval gốc.
+- Group suite tự viết có 10 case nên không coi là benchmark độc lập quy mô lớn. Chưa có người ngoài nhóm xác nhận dùng thử; chưa đo chi phí tổng hay độ dao động nhiều lần của model.
+- Tool dedup dùng chính sách URL, không phát hiện bài sao chép hoặc bảo đảm các URL chuẩn hóa có nội dung đồng nhất. Giữ URL/metadata đầu tiên cho người dùng tự đối chiếu.
+- Nếu làm thêm một vòng: xây test phê duyệt có payload/destination cụ thể, kiểm hủy/đổi nội dung qua nhiều lượt và chấm riêng khả năng thu thập nội dung với quyền thực thi. Không nâng lên agent tự gửi khi chưa có nhu cầu và kiểm soát phù hợp.
 
-- Fix nào thuộc `system_prompt.md`?
-- Fix nào thuộc `tools.yaml`?
-- Failure nào cần review thủ công thay vì chấm tự động?
-- Nếu có thêm một vòng, nhóm sẽ thử giả thuyết nào?
+## 8. Nguồn
 
-## 8. Tài liệu tham khảo
-
--
+- Đề bài, RULES, CHECKPOINTS, RUBRIC và source starter trong repo này.
+- [Streamlit chat input](https://docs.streamlit.io/develop/api-reference/chat/st.chat_input), [AppTest](https://docs.streamlit.io/develop/api-reference/app-testing/st.testing.v1.apptest).
+- [Python urllib.parse](https://docs.python.org/3/library/urllib.parse.html), dùng cho tool URL; chính sách loại tracking là lựa chọn riêng của tool.

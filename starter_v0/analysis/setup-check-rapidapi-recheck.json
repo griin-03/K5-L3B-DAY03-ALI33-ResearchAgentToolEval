@@ -1,0 +1,38 @@
+{
+  "host": "twitter-api45.p.rapidapi.com",
+  "all_passed": true,
+  "results": [
+    {
+      "tool": "timeline",
+      "endpoint": "/timeline.php",
+      "status_code": 200,
+      "elapsed_seconds": 2.36,
+      "response_keys": [
+        "timeline",
+        "next_cursor",
+        "prev_cursor",
+        "status",
+        "user"
+      ],
+      "item_count": 1,
+      "nonempty_content": true,
+      "status": "PASS"
+    },
+    {
+      "tool": "social_search",
+      "endpoint": "/search.php",
+      "status_code": 200,
+      "elapsed_seconds": 2.37,
+      "response_keys": [
+        "status",
+        "timeline",
+        "next_cursor",
+        "prev_cursor"
+      ],
+      "item_count": 1,
+      "nonempty_content": true,
+      "status": "PASS"
+    }
+  ],
+  "checked_at": "2026-11-10T18:07:41+07:00"
+}

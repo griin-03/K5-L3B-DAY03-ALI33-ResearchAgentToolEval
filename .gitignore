@@ -17,6 +17,9 @@ starter/
 # Tool scratch output
 arxiv_papers/
 
+# Interactive user sessions are private; scripted live-API evidence is explicit.
+starter_v0/transcripts/ui_*.transcript.json
+
 # OS / editor
 .DS_Store
 Thumbs.db
