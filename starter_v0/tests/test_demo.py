@@ -30,7 +30,6 @@ def test_ui_loads_and_chat_turn_is_logged(monkeypatch, tmp_path):
     class Provider:
         def complete(self, *args, **kwargs):
             return ModelResponse(text='Tôi là trợ lý nghiên cứu ALI33.', tool_calls=[])
-    monkeypatch.delenv('DEMO_ACCESS_CODE', raising=False)
     monkeypatch.setenv('OPENROUTER_API_KEY', 'test-key-only')
     monkeypatch.setenv('DAY03_TRANSCRIPTS_DIR', str(tmp_path))
     monkeypatch.setattr('demo_runtime.make_provider', lambda _: Provider())
@@ -43,10 +42,11 @@ def test_ui_loads_and_chat_turn_is_logged(monkeypatch, tmp_path):
     assert len(list(tmp_path.glob('*.transcript.json'))) == 1
 
 
-def test_access_code_is_required_before_chat(monkeypatch):
+def test_ui_opens_directly_even_with_legacy_access_code(monkeypatch):
     monkeypatch.setenv('DEMO_ACCESS_CODE', 'unit-test-code')
+    monkeypatch.setenv('OPENROUTER_API_KEY', 'test-key-only')
     app = AppTest.from_file(str(Path(__file__).resolve().parents[1]/'app.py')).run(timeout=15)
-    assert not app.exception and len(app.chat_input) == 0
-    app.text_input[0].set_value('wrong')
-    app.button[0].click().run(timeout=15)
-    assert len(app.error) == 1 and len(app.chat_input) == 0
+    assert not app.exception and len(app.chat_input) == 1
+    assert not app.chat_input[0].disabled
+    assert len(app.text_input) == 0
+    assert 'authenticated' not in app.session_state

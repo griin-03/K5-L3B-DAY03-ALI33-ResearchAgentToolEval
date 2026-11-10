@@ -15,7 +15,7 @@ Chuẩn bị một phương án hoàn chỉnh để nhóm so sánh: setup, basel
 - Yêu cầu làm một phương án riêng để so sánh, triển khai lên VPS ARM 24GB và domain `ali33.sunstudy.app`; yêu cầu tắt run trên laptop.
 - Có 6 phiên bản được đo thật: v0 70%, v1 80%, v2–v5-tools 95%; các thử nghiệm không tăng điểm vẫn được giữ.
 - Phương án có tool deduplicate_sources, đúng 10 case nhóm (5 single/5 multi, đạt 10/10), 97 test offline pass không skip, bốn phiên chat.py thật gồm sáu lượt và UI Streamlit.
-- Dùng user/service riêng trên VPS, upstream loopback, HTTPS và mã demo. Không gửi Telegram thật.
+- Dùng user/service riêng trên VPS, upstream loopback, HTTPS; giao diện mở trực tiếp không cần mã demo. Không gửi Telegram thật.
 
 ## 4. Bằng chứng và AI đã dùng
 

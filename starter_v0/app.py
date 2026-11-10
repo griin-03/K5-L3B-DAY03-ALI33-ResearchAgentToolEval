@@ -1,8 +1,6 @@
 from __future__ import annotations
-import hmac
 import json
 import os
-from pathlib import Path
 
 import streamlit as st
 from demo_runtime import ROOT, new_transcript, redact, run_turn, version_label
@@ -19,20 +17,6 @@ st.markdown('''<style>
 [data-testid="stChatMessage"]{border:1px solid #e5eaf4;border-radius:16px;padding:1.2rem;margin:.6rem 0;background:white}
 button{border-radius:9px!important}
 </style>''', unsafe_allow_html=True)
-
-code = os.getenv('DEMO_ACCESS_CODE', '')
-if code and not st.session_state.get('authenticated'):
-    st.title('ALI33 · Research Desk')
-    st.write('Nhập mã demo được nhóm cung cấp để bắt đầu tra cứu.')
-    with st.form('access'):
-        entered = st.text_input('Mã demo', type='password')
-        if st.form_submit_button('Vào Research Desk'):
-            if hmac.compare_digest(entered, code):
-                st.session_state.authenticated = True
-                st.rerun()
-            else:
-                st.error('Mã demo chưa đúng.')
-    st.stop()
 
 if 'transcript' not in st.session_state:
     st.session_state.transcript = new_transcript()

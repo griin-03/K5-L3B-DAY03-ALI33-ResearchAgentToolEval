@@ -61,7 +61,7 @@ def main():
 
 Research Desk tìm nguồn web và bài đăng X, đọc URL, lọc nguồn trùng và hỗ trợ tổng hợp có dẫn chứng. Người dùng xem được tool calls và lỗi; gửi Telegram bị tắt trong UI demo.
 
-**Link dùng thử:** https://ali33.sunstudy.app — có mã truy cập do người vận hành cung cấp. {deploy_state} Mã demo và API key không nằm trong báo cáo/repo.
+**Link dùng thử:** https://ali33.sunstudy.app — mở trực tiếp, không cần mã truy cập. {deploy_state} API key chỉ ở server, không nằm trong báo cáo/repo.
 
 **Chạy từ source:** `cd starter_v0`, tạo môi trường và cấu hình `.env` theo [hướng dẫn](../../docs/TOOL-SETUP.md), rồi `python -m streamlit run app.py --server.port 8503`. Dependency có trong `requirements.txt`; `requirements.lock.txt` ghi phiên bản dùng cho bản này. Hiện ứng dụng local đã tắt theo yêu cầu; demo chạy trên VPS ARM 24GB bằng service riêng.
 
@@ -145,7 +145,7 @@ Bốn phiên chạy **chat.py thật** với API thật và các lượt ngườ
 |---|---|---|
 | Tool mới | [tool.py](../../starter_v0/tools/deduplicate_sources/tool.py), [TOOL.md](../../starter_v0/tools/deduplicate_sources/TOOL.md), registry + tools.yaml | Local, không mạng/side effect; giữ bản đầu, không chứng minh hai bài khác URL là cùng nội dung. |
 | Unit tests | [test_tools_todo.py](../../starter_v0/tests/test_tools_todo.py), [test_demo.py](../../starter_v0/tests/test_demo.py) | **97 passed, 0 failed, 0 skipped**, cả local trước khi tắt và VPS ARM. Tool mới có 10 case tính cả tham số hóa: happy path, input xấu, lỗi bất ngờ, bảo toàn URL và giới hạn. |
-| UI | [app.py](../../starter_v0/app.py), [demo_runtime.py](../../starter_v0/demo_runtime.py) | Có chat, nguồn/tool events, lỗi thật, tải transcript, phiên mới và mã truy cập. UI không gửi Telegram. |
+| UI | [app.py](../../starter_v0/app.py), [demo_runtime.py](../../starter_v0/demo_runtime.py) | Có chat, nguồn/tool events, lỗi thật, tải transcript và phiên mới; mở trực tiếp không cần mã. UI không gửi Telegram. |
 | Triển khai | [cấu hình](../../deploy/README.md), [kiểm tra VPS](../../starter_v0/analysis/deployment.json) | Service riêng, loopback upstream, Nginx HTTPS; key chỉ ở server, không commit. |
 
 Ví dụ unit test bổ sung giá trị ngoài eval: hai query `?id=1` và `?id=2` không bị gộp, và exception trong normalizer trả error dict thay vì làm agent crash. Routing eval chỉ thấy model chọn đúng tên tool, không đo được hai hành vi code đó.
@@ -205,7 +205,7 @@ Chuẩn bị một phương án hoàn chỉnh để nhóm so sánh: setup, basel
 - Yêu cầu làm một phương án riêng để so sánh, triển khai lên VPS ARM 24GB và domain `ali33.sunstudy.app`; yêu cầu tắt run trên laptop.
 - Có 6 phiên bản được đo thật: v0 70%, v1 80%, v2–v5-tools 95%; các thử nghiệm không tăng điểm vẫn được giữ.
 - Phương án có tool deduplicate_sources, đúng 10 case nhóm (5 single/5 multi, đạt 10/10), 97 test offline pass không skip, bốn phiên chat.py thật gồm sáu lượt và UI Streamlit.
-- Dùng user/service riêng trên VPS, upstream loopback, HTTPS và mã demo. Không gửi Telegram thật.
+- Dùng user/service riêng trên VPS, upstream loopback, HTTPS; giao diện mở trực tiếp không cần mã demo. Không gửi Telegram thật.
 
 ## 4. Bằng chứng và AI đã dùng
 

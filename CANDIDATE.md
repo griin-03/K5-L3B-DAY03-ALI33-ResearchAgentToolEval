@@ -2,7 +2,7 @@
 
 Nhánh `le-thanh-tung/solo-day03` là phương án độc lập để nhóm so sánh, chưa thay main.
 
-- **Demo:** https://ali33.sunstudy.app — lấy mã truy cập từ người vận hành.
+- **Demo:** https://ali33.sunstudy.app — mở trực tiếp, không cần mã truy cập.
 - **Báo cáo:** [Phần A + B](report/team/group_report.md), [báo cáo Tùng](report/team/2A202603819_LeThanhTung.md).
 - **Bằng chứng:** [version log](starter_v0/artifacts/version_log.csv), [so sánh](starter_v0/analysis/comparison.json), [live chat](starter_v0/analysis/live-summary.json).
 - **Mức đạt quan sát:** base 70% → 95%; group 10/10; 97 unit/contract/UI tests pass, 0 skipped. V3/V4 không tăng điểm và được giữ nguyên trong log.

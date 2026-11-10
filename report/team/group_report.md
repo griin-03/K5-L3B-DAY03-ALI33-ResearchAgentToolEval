@@ -14,7 +14,7 @@
 
 Research Desk tìm nguồn web và bài đăng X, đọc URL, lọc nguồn trùng và hỗ trợ tổng hợp có dẫn chứng. Người dùng xem được tool calls và lỗi; gửi Telegram bị tắt trong UI demo.
 
-**Link dùng thử:** https://ali33.sunstudy.app — có mã truy cập do người vận hành cung cấp. Đã triển khai HTTPS và kiểm tra truy cập từ bên ngoài; smoke test tin tức và bài X trên VPS thành công. Một yêu cầu đọc URL còn bị model hỏi lại trước khi gọi fetch, được ghi ở phần hạn chế. Mã demo và API key không nằm trong báo cáo/repo.
+**Link dùng thử:** https://ali33.sunstudy.app — mở trực tiếp, không cần mã truy cập. Đã triển khai HTTPS và kiểm tra truy cập từ bên ngoài; smoke test tin tức và bài X trên VPS thành công. Một yêu cầu đọc URL còn bị model hỏi lại trước khi gọi fetch, được ghi ở phần hạn chế. API key chỉ ở server, không nằm trong báo cáo/repo.
 
 **Chạy từ source:** `cd starter_v0`, tạo môi trường và cấu hình `.env` theo [hướng dẫn](../../docs/TOOL-SETUP.md), rồi `python -m streamlit run app.py --server.port 8503`. Dependency có trong `requirements.txt`; `requirements.lock.txt` ghi phiên bản dùng cho bản này. Hiện ứng dụng local đã tắt theo yêu cầu; demo chạy trên VPS ARM 24GB bằng service riêng.
 
@@ -120,7 +120,7 @@ Bốn phiên chạy **chat.py thật** với API thật và các lượt ngườ
 |---|---|---|
 | Tool mới | [tool.py](../../starter_v0/tools/deduplicate_sources/tool.py), [TOOL.md](../../starter_v0/tools/deduplicate_sources/TOOL.md), registry + tools.yaml | Local, không mạng/side effect; giữ bản đầu, không chứng minh hai bài khác URL là cùng nội dung. |
 | Unit tests | [test_tools_todo.py](../../starter_v0/tests/test_tools_todo.py), [test_demo.py](../../starter_v0/tests/test_demo.py) | **97 passed, 0 failed, 0 skipped**, cả local trước khi tắt và VPS ARM. Tool mới có 10 case tính cả tham số hóa: happy path, input xấu, lỗi bất ngờ, bảo toàn URL và giới hạn. |
-| UI | [app.py](../../starter_v0/app.py), [demo_runtime.py](../../starter_v0/demo_runtime.py) | Có chat, nguồn/tool events, lỗi thật, tải transcript, phiên mới và mã truy cập. UI không gửi Telegram. |
+| UI | [app.py](../../starter_v0/app.py), [demo_runtime.py](../../starter_v0/demo_runtime.py) | Có chat, nguồn/tool events, lỗi thật, tải transcript và phiên mới; mở trực tiếp không cần mã. UI không gửi Telegram. |
 | Triển khai | [cấu hình](../../deploy/README.md), [kiểm tra VPS](../../starter_v0/analysis/deployment.json) | Service riêng, loopback upstream, Nginx HTTPS; key chỉ ở server, không commit. |
 
 Ví dụ unit test bổ sung giá trị ngoài eval: hai query `?id=1` và `?id=2` không bị gộp, và exception trong normalizer trả error dict thay vì làm agent crash. Routing eval chỉ thấy model chọn đúng tên tool, không đo được hai hành vi code đó.
