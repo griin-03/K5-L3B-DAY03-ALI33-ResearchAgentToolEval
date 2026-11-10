@@ -151,7 +151,7 @@ Không thực hiện trong phương án này. Không có metric hoặc run local
 |---|---|---|---|
 | Lê Thanh Tùng | **2A202603819** | Chuẩn bị phương án: cấu hình API, các vòng prompt/schema, tool mới, test/eval, UI, live chat và triển khai VPS/domain; Codex hỗ trợ thực hiện. | [Báo cáo cá nhân](2A202603819_LeThanhTung.md), [commit kỹ thuật `fddd7ff`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/fddd7ff8bc306475031112582eeee98805b28f3b), [TEAM.md](../../TEAM.md#lethanhtung-2a202603819). |
 | Cấn Xuân Nghĩa | 2A202603805 | Chưa có báo cáo/commit cá nhân được ghi nhận trong phạm vi bằng chứng này. | Thành viên bổ sung phần việc thực tế vào TEAM.md và báo cáo cá nhân. |
-| Nguyễn Mạnh Hùng | 2A202603852 | Chưa có báo cáo/commit cá nhân được ghi nhận trong phạm vi bằng chứng này. | Thành viên bổ sung phần việc thực tế vào TEAM.md và báo cáo cá nhân. |
+| Nguyễn Mạnh Hùng | 2A202603852 | Báo cáo cá nhân khai báo phần UI Streamlit/local/live demo; cần đối chiếu thêm commit code và log. | [Báo cáo cá nhân đã bổ sung](2A202603852_NguyenManhHung.md), [TEAM.md](../../TEAM.md#nguyenmanhhung-2a202603852). |
 
 Phần đã hoàn thành của Tùng có thể kiểm tra từ các liên kết trên. Để chốt bài nhóm theo [SUBMISSION.md](../../SUBMISSION.md), nhóm còn cần thống nhất nhánh/commit nộp, bổ sung báo cáo và commit kỹ thuật thực tế của từng thành viên; mỗi người tự nộp link repo trên LMS.
 

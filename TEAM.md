@@ -26,7 +26,7 @@
 |---|---|---|
 | Lê Thanh Tùng — 2A202603819 | [2A202603819_LeThanhTung.md](report/team/2A202603819_LeThanhTung.md) | Đã có phần việc, bằng chứng, khai báo AI và đối chiếu kết quả. |
 | Cấn Xuân Nghĩa — 2A202603805 | Tên file cần tạo: `report/team/2A202603805_CanXuanNghia.md` | Chưa có báo cáo/commit cá nhân được ghi nhận trong phạm vi cập nhật này; thành viên bổ sung theo công việc thật. |
-| Nguyễn Mạnh Hùng — 2A202603852 | Tên file cần tạo: `report/team/2A202603852_NguyenManhHung.md` | Chưa có báo cáo/commit cá nhân được ghi nhận trong phạm vi cập nhật này; thành viên bổ sung theo công việc thật. |
+| Nguyễn Mạnh Hùng — 2A202603852 | [2A202603852_NguyenManhHung.md](report/team/2A202603852_NguyenManhHung.md) | Đã có báo cáo cá nhân tự khai phần UI/live demo; cần bổ sung liên kết commit code và log để đối chiếu. |
 
 ## LeThanhTung-2A202603819
 
@@ -68,12 +68,13 @@ Thành viên bổ sung báo cáo `report/team/2A202603805_CanXuanNghia.md` và l
 
 ### Phần việc phụ trách
 
-Thành viên bổ sung phần việc đã thực hiện khi nhóm so sánh hoặc tích hợp phương án.
+Theo báo cáo do Hùng bổ sung: giao diện chat Streamlit, kiểm tra chạy local, hỗ trợ live demo và tài liệu.
 
 ### Đóng góp cụ thể
 
-Chưa có thông tin đóng góp cá nhân được xác nhận trong phạm vi cập nhật này.
+Hùng khai báo đã chỉnh giao diện để hiển thị phản hồi chat, ẩn debug mặc định và chạy local ở port 8502. Đây là thông tin từ báo cáo cá nhân; cần đối chiếu thêm commit code/log trước khi tích hợp vào phương án nhóm.
 
 ### Bằng chứng
 
-Thành viên bổ sung báo cáo `report/team/2A202603852_NguyenManhHung.md` và liên kết file/commit/PR thực tế; khai báo AI và cách kiểm tra kết quả theo [mẫu báo cáo](report/team/MSSV_HoTen.md).
+- [Báo cáo cá nhân của Hùng](report/team/2A202603852_NguyenManhHung.md), được thêm trên main qua các commit `3265061` và `dfd2551`.
+- Thành viên bổ sung liên kết commit code/log và khai báo AI theo [mẫu báo cáo](report/team/MSSV_HoTen.md).
