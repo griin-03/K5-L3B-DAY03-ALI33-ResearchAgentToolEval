@@ -24,7 +24,7 @@ Tôi chuẩn bị một phương án để nhóm so sánh trước khi chọn ho
 | Tool mới | `deduplicate_sources` loại URL trùng theo quy tắc chuẩn hóa, giữ metadata của nguồn xuất hiện đầu tiên; có `TOOL.md`, đăng ký và khai báo schema. |
 | Unit test và eval nhóm | Kết quả đã chạy: 97 passed, 0 failed, 0 skipped. Bộ nhóm đúng 10 case, gồm 5 single và 5 multi, kết quả 10/10; hai case dedup có kiểm tra payload/count riêng ngoài routing. |
 | UI và live chat | UI Streamlit có hội thoại, tool calls, lỗi và tải transcript; bốn phiên CLI dùng API thật với tổng sáu lượt, gồm yêu cầu thường, bổ sung thông tin thiếu, xác nhận rồi hủy và tool mới. |
-| Triển khai | Demo tại https://ali33.sunstudy.app trên VPS ARM 24GB, chạy service riêng với Nginx/HTTPS. Key ở phía server; mã truy cập không đưa vào Git. Server local đã dừng theo yêu cầu. |
+| Triển khai | Demo tại https://ali33.sunstudy.app trên VPS ARM 24GB, chạy service riêng với Nginx/HTTPS. Key ở phía server; giao diện mở trực tiếp không cần mã truy cập. Server local đã dừng theo yêu cầu. |
 | Báo cáo | Tổng hợp kết quả, phân tích lỗi còn lại, liên kết log và khai báo đóng góp trong báo cáo nhóm và TEAM.md. |
 
 ## 4. Bằng chứng
@@ -39,6 +39,8 @@ Các liên kết kỹ thuật dưới đây trỏ tới commit cố định đã
 - UI/triển khai: [app.py](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/starter_v0/app.py), [hướng dẫn và cấu hình VPS](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/deploy/README.md).
 
 **AI/công cụ đã dùng và cách kiểm tra kết quả:** Tôi dùng Codex để đọc đề, hỗ trợ viết code/test, thực thi API/eval, phân tích log, soạn tài liệu và triển khai theo yêu cầu. Việc kiểm tra trong quá trình làm gồm pytest, kiểm hợp đồng tool, đối chiếu input/output và transcript, kiểm hash snapshot, đọc run lỗi và kiểm API/HTTPS trên VPS. Các số liệu lấy từ lần chạy thật; tôi không ghi toàn bộ code là tự gõ hoặc gán phần của phương án này cho thành viên khác.
+
+- Cập nhật giao diện mở trực tiếp: [commit `70c5f3a`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/70c5f3add97a06ef564097436c7a432dec897fa7), [bằng chứng 4 test UI pass và HTTPS 200](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/70c5f3add97a06ef564097436c7a432dec897fa7/starter_v0/analysis/public-access.json). Thay đổi này chỉ bỏ mã truy cập, không thay prompt/tool hay số liệu eval đã báo cáo.
 
 ## 5. Tự đánh giá dựa trên bằng chứng
 

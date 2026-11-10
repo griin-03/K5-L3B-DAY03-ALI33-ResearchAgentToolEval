@@ -9,6 +9,7 @@
 - Nhánh chứa báo cáo được bổ sung: `main`.
 - Nhánh chứa phương án kỹ thuật đã triển khai: [`le-thanh-tung/solo-day03`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/tree/le-thanh-tung/solo-day03).
 - Commit kỹ thuật dùng làm bằng chứng: [`fddd7ff8bc306475031112582eeee98805b28f3b`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/fddd7ff8bc306475031112582eeee98805b28f3b).
+- Cập nhật UI mở trực tiếp, không cần mã demo: [commit `70c5f3a`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/70c5f3add97a06ef564097436c7a432dec897fa7), [bằng chứng kiểm tra VPS](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/70c5f3add97a06ef564097436c7a432dec897fa7/starter_v0/analysis/public-access.json).
 - Nhánh/commit nộp cuối: nhóm cần thống nhất sau khi so sánh hoặc tích hợp các phương án. Việc bổ sung báo cáo trên `main` chưa thay thế bước này.
 
 ## Thành viên
