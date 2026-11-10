@@ -11,9 +11,9 @@
 
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
-|   1 |        |      |       |        |         |
-|   2 |        |      |       |        |         |
-
+|   1 |Lê Thanh Tùng        |2A202603819      |lethanhtung6803@gmail.com       |griin-03        |Trưởng nhóm        |
+|   2 |Cấn Xuân Nghĩa        |2A202603805     |cannghia.xn@gmail.com     |xuannghia2        | Thành viên        |
+|   3 |Nguyễn Mạnh Hùng  | 2A202603852| nguyenmanhhunglun@gmail.com | HungLunnn | Thành viên |
 ## Cá nhân
 
 Mỗi thành viên đồng thời tạo một báo cáo riêng trong `report/` theo dạng:
