@@ -1,0 +1,22 @@
+{
+  "checked_at": "2026-11-10T19:41:54+07:00",
+  "url": "https://ali33.sunstudy.app",
+  "change": "Removed demo-code login; users open the research chat directly.",
+  "vps_release": "20261110-v5-tools-public",
+  "service_state": "active",
+  "access_code_configured": false,
+  "app_sha256": "f071f9c3a4834a4f730ed9444eacb96cb7e7d83f291c533c2f452e2d51c33f49",
+  "deployed_app_sha256_matches": true,
+  "vps_ui_tests": {
+    "command": "python -m pytest tests/test_demo.py -q -p no:cacheprovider",
+    "passed": 4,
+    "failed": 0,
+    "elapsed_seconds": 0.88,
+    "model_api_calls": false
+  },
+  "external_https_probe": {
+    "root_status": 200,
+    "health_status": 200
+  },
+  "model_and_eval_artifacts_changed": false
+}

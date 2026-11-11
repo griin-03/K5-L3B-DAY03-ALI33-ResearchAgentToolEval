@@ -2,13 +2,13 @@
 
 > Báo cáo tổng hợp kết quả đã ghi nhận cho ALI33 từ phương án do **Lê Thanh Tùng — 2A202603819** chuẩn bị, có Codex hỗ trợ thực hiện. Bằng chứng kỹ thuật được cố định tại commit [`fddd7ff`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/fddd7ff8bc306475031112582eeee98805b28f3b) trên nhánh `le-thanh-tung/solo-day03`.
 >
-> Báo cáo được bổ sung trên `main`; mã triển khai và log nằm ở commit nêu trên. Nhóm chưa ghi nhận quyết định chọn phương án nộp cuối. Đóng góp của Nghĩa/Hùng sẽ được bổ sung theo công việc và bằng chứng của từng người.
+> Code, dependency, tool mới, test, run, transcript và ba báo cáo cá nhân đã được tích hợp trên **`main`** theo yêu cầu trưởng nhóm. Các liên kết commit giữ nguyên để đối chiếu lịch sử đo. Nghĩa/Hùng tiếp tục bổ sung bằng chứng đóng góp và khai báo AI của từng người.
 
 ## 1. Thông tin nhóm
 
 - Nhóm **ALI33**, lớp **L3B**; thành viên xem [TEAM.md](../../TEAM.md).
 - Provider/model cố định: **OpenRouter / openai/gpt-4o-mini**, temperature 0.
-- Bản tích hợp cuối: **v5-tools**. Đây là ứng viên, chưa phải quyết định chung chọn bản nộp.
+- Bản kỹ thuật tích hợp: **v5-tools**, gồm cập nhật UI mở trực tiếp từ `70c5f3a`; nhánh nộp: **main**.
 
 ## 2. PHẦN A — Giới thiệu agent
 
@@ -18,7 +18,7 @@ Research Desk tìm nguồn web và bài đăng X, đọc URL, lọc nguồn trù
 
 **Link dùng thử:** https://ali33.sunstudy.app — mở trực tiếp, không cần mã truy cập. Đã triển khai HTTPS và kiểm tra truy cập từ bên ngoài; smoke test tin tức và bài X trên VPS thành công. Một yêu cầu đọc URL còn bị model hỏi lại trước khi gọi fetch, được ghi ở phần hạn chế. API key chỉ ở server, không nằm trong báo cáo/repo. Cập nhật UI bỏ màn hình nhập mã tại [commit `70c5f3a`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/70c5f3add97a06ef564097436c7a432dec897fa7); [kiểm tra truy cập trực tiếp](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/70c5f3add97a06ef564097436c7a432dec897fa7/starter_v0/analysis/public-access.json) ghi 4 test UI pass trên VPS và HTTPS trả 200. Các log eval bên dưới vẫn trỏ tới commit đã đo trước đó.
 
-**Chạy từ source:** lấy [mã nguồn tại commit đã đo](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/tree/fddd7ff8bc306475031112582eeee98805b28f3b) bằng `git clone --branch le-thanh-tung/solo-day03 https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval.git`, vào thư mục repo và chạy `git checkout fddd7ff8bc306475031112582eeee98805b28f3b`, sau đó `cd starter_v0`, tạo môi trường và cấu hình `.env` theo [hướng dẫn](../../docs/TOOL-SETUP.md), rồi `python -m streamlit run app.py --server.port 8503`. Dependency có trong `requirements.txt`; `requirements.lock.txt` ghi phiên bản dùng cho bản này. Hiện ứng dụng local đã tắt theo yêu cầu; demo chạy trên VPS ARM 24GB bằng service riêng.
+**Chạy từ source:** `git clone --branch main https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval.git`, vào thư mục repo rồi `cd starter_v0`, tạo môi trường và cấu hình `.env` theo [hướng dẫn](../../docs/TOOL-SETUP.md), rồi `python -m streamlit run app.py --server.port 8503`. Dependency có trong `requirements.txt`; `requirements.lock.txt` ghi phiên bản dùng cho bản này. Hiện ứng dụng local đã tắt theo yêu cầu; demo chạy trên VPS ARM 24GB bằng service riêng.
 
 ### A2. Tool đang khai báo
 
@@ -153,7 +153,7 @@ Không thực hiện trong phương án này. Không có metric hoặc run local
 | Cấn Xuân Nghĩa | 2A202603805 | Đã có báo cáo phân tích tool/test/eval; tác giả chưa nhận code/run có sẵn là phần tự làm, còn cần commit kỹ thuật và khai báo AI. | [Báo cáo cá nhân](2A202603805_CanXuanNghia.md), [TEAM.md](../../TEAM.md#canxuannghia-2a202603805). |
 | Nguyễn Mạnh Hùng | 2A202603852 | Báo cáo cá nhân khai báo phần UI Streamlit/local/live demo; cần đối chiếu thêm commit code và log. | [Báo cáo cá nhân đã bổ sung](2A202603852_NguyenManhHung.md), [TEAM.md](../../TEAM.md#nguyenmanhhung-2a202603852). |
 
-Phần đã hoàn thành của Tùng có thể kiểm tra từ các liên kết trên. Để chốt bài nhóm theo [SUBMISSION.md](../../SUBMISSION.md), nhóm còn cần thống nhất nhánh/commit nộp, hoàn thiện khai báo AI/bằng chứng và commit kỹ thuật thực tế của từng thành viên; mỗi người tự nộp link repo trên LMS.
+Code và lịch sử kỹ thuật của Tùng hiện đã nằm trên main cùng ba báo cáo cá nhân. Theo [SUBMISSION.md](../../SUBMISSION.md), phần còn lại là Nghĩa/Hùng hoàn thiện khai báo AI, bằng chứng và commit kỹ thuật thực tế; mỗi người tự nộp link repo trên LMS.
 
 ## 7. B6 — Hạn chế và hướng cải thiện
 
@@ -172,4 +172,4 @@ Phần đã hoàn thành của Tùng có thể kiểm tra từ các liên kết 
 
 ## 9. Đối chiếu hồ sơ trước khi nộp
 
-Ngày 11/11/2026 đã có đủ ba báo cáo cá nhân. Bản main vẫn chưa tích hợp code/log của nhánh demo; xem [kết quả kiểm tra và các mục còn thiếu](submission_audit.md). Chưa coi hồ sơ nhóm đã hoàn tất chỉ dựa trên số lượng báo cáo.
+Ngày 11/11/2026 đã tích hợp code/log của nhánh demo vào main và giữ đủ ba báo cáo cá nhân. Xem [kết quả kiểm tra và phần đóng góp còn cần bổ sung](submission_audit.md). Việc tích hợp code chưa thay thế bằng chứng kỹ thuật và khai báo AI riêng của từng thành viên.

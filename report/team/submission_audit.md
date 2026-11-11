@@ -2,13 +2,13 @@
 
 Đối chiếu [SUBMISSION.md](../../SUBMISSION.md), [RULES.md](../../RULES.md) và [RUBRIC.md](../../RUBRIC.md) với main tại [`fe835ac`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/fe835ac25a5476497d24c618bf6ddc23fbef0b28) và nhánh demo tại [`70c5f3a`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/70c5f3add97a06ef564097436c7a432dec897fa7).
 
-**Kết luận:** đủ ba file báo cáo cá nhân; bản demo có code và bằng chứng kỹ thuật, nhưng hồ sơ nhóm chưa hoàn tất vì chưa chốt/tích hợp nhánh nộp và chưa có đủ bằng chứng đóng góp cá nhân. Không suy ra một thành viên chưa làm việc chỉ vì bằng chứng chưa được push.
+**Cập nhật sau yêu cầu tích hợp:** code và log của nhánh demo đã được đưa vào **main**, giữ ba báo cáo cá nhân và lịch sử commit. Phần kỹ thuật của Tùng đã nằm trên nhánh nộp; phần còn cần bổ sung là bằng chứng đóng góp, commit kỹ thuật và khai báo AI của Nghĩa/Hùng. Các SHA phía trên là mốc kiểm tra trước khi tích hợp.
 
 ## 1. Cá nhân và sự thống nhất trong TEAM.md
 
 | Thành viên | Đã có | Còn cần hoàn thiện |
 |---|---|---|
-| Tùng — 2A202603819 | Báo cáo đúng tên, thông tin, khai báo Codex, link code/run/transcript và hạn chế. Có commit kỹ thuật `fddd7ff`, `70c5f3a` trên nhánh riêng. | Đưa phần kỹ thuật vào lịch sử nhánh nhóm chọn nộp và chốt commit; hiện các commit này chưa nằm trên main. |
+| Tùng — 2A202603819 | Báo cáo đúng tên, thông tin, khai báo Codex, link code/run/transcript và hạn chế. Commit kỹ thuật `fddd7ff`, `70c5f3a` đã được merge vào lịch sử main. | Đã tích hợp; commit chốt mã được ghi trong TEAM.md. |
 | Nghĩa — 2A202603805 | Báo cáo được thêm qua `fe835ac`, phân tích tool/test/eval và số liệu phù hợp phương án v5-tools; ghi rõ phạm vi kế thừa và môi trường thiếu Streamlit. | Khai báo AI/công cụ đã dùng và cách kiểm tra; commit kỹ thuật, bằng chứng review/test do mình thực hiện. Báo cáo còn checklist chưa hoàn tất ở mục 10. |
 | Hùng — 2A202603852 | Báo cáo được thêm qua `3265061`, `dfd2551`, khai báo phần UI/local/live demo. | Push hoặc liên kết commit chỉnh UI cùng log/transcript tương ứng; khai báo AI/công cụ đã dùng. Các commit hiện thấy của Hùng chỉ chứa báo cáo. |
 
@@ -19,19 +19,19 @@
 
 ## 2. Bài nhóm và code thực tế
 
-| Hạng mục bắt buộc | Main tại thời điểm kiểm tra | Nhánh demo `70c5f3a` |
+| Hạng mục bắt buộc | Main sau tích hợp | Nguồn đối chiếu |
 |---|---|---|
-| Báo cáo nhóm Phần A + B | Có; ghi rõ đây là phương án chờ nhóm lựa chọn. | Có báo cáo phương án. |
-| Ba báo cáo cá nhân | Có đủ. | Chỉ có báo cáo Tùng; chưa nhận báo cáo hai bạn từ main. |
-| UI `starter_v0/app.py` | Chưa có. | Có Streamlit và runtime. |
-| Tool mới + tài liệu + đăng ký | Chưa có `deduplicate_sources`. | Có đủ. |
-| Version log v0–v3 trở lên | 0 dòng dữ liệu. | 6 dòng: v0–v5-tools. |
-| Run JSON | 0. | 8, gồm 6 run base được chọn, 1 group và 1 run chẩn đoán cũ. |
-| Eval nhóm | 0 case. | Đúng 10: 5 single + 5 multi, metadata/expect đầy đủ, có route tới tool mới. |
-| Transcript live | 0. | 4 phiên, tổng 6 lượt, có tra cứu thường, hỏi thiếu thông tin rồi bổ sung, yêu cầu gửi rồi hủy. |
-| Commit kỹ thuật của mỗi người trên nhánh nộp | Chưa đáp ứng. | Hiện mới có bằng chứng commit kỹ thuật của Tùng. |
+| Báo cáo nhóm Phần A + B | Có, cập nhật lệnh chạy từ main. | Giữ báo cáo nhóm mới nhất. |
+| Ba báo cáo cá nhân | Có đủ; giữ báo cáo của Nghĩa/Hùng. | Main trước tích hợp. |
+| UI `starter_v0/app.py` | Có Streamlit và runtime, mở trực tiếp không cần mã. | `70c5f3a`. |
+| Tool mới + tài liệu + đăng ký | Có đủ `deduplicate_sources`. | Nhánh nguồn của Tùng. |
+| Version log v0–v3 trở lên | 6 dòng: v0–v5-tools. | Snapshot và run JSON. |
+| Run JSON | 8 file: 6 run base được chọn, 1 group và 1 run chẩn đoán cũ. | Giữ nguyên log gốc. |
+| Eval nhóm | Đúng 10: 5 single + 5 multi; metadata/expect đầy đủ, có route tới tool mới. | Dataset và run group. |
+| Transcript live | 4 phiên, tổng 6 lượt; đủ các tình huống yêu cầu. | Transcript gốc của nhánh nguồn. |
+| Commit kỹ thuật của mỗi người trên nhánh nộp | Đã có lịch sử kỹ thuật của Tùng; Nghĩa/Hùng còn thiếu bằng chứng tương ứng. | Không gán lại tác giả commit. |
 
-Vì vậy, clone main rồi làm theo lệnh chạy UI sẽ chưa tái lập được bản demo. Khi nhóm quyết định chọn/tích hợp phương án, cần đưa code, dependency, run, transcript và báo cáo về cùng nhánh nộp, giữ lịch sử tác giả thật và điền commit chốt trong TEAM.md. Chưa thực hiện bước chọn/merge phương án trong lần kiểm tra này.
+Code, dependency, run, transcript và báo cáo hiện cùng nằm trên main. Việc merge giữ hai commit kỹ thuật của Tùng và các commit báo cáo của Nghĩa/Hùng. Người chấm có thể lấy source main và chạy theo mục A1 trong báo cáo nhóm; API key tự cấu hình theo hướng dẫn, không nằm trong repo.
 
 ## 3. Kiểm tra bằng chứng kỹ thuật
 
@@ -47,6 +47,7 @@ sudo -u ali33-demo env PYTHONDONTWRITEBYTECODE=1 \
 97 passed in 1.09s
 ```
 
+- Kiểm tra thêm đúng gói source sau merge: xuất Git index bằng `git archive`, giải nén vào thư mục tạm trên VPS rồi chạy toàn suite offline; kết quả **97 passed in 1.16s**. Không thay service và không chạy API/eval mới.
 - Service `ali33-research` đang active; release `20261110-v5-tools-public`. Kết quả này xác nhận bản demo chung, không thay thế bằng chứng cá nhân của Nghĩa hoặc Hùng.
 - Lỗi R12 và lần runtime hỏi lại URL trước khi gọi fetch vẫn là các hạn chế đã ghi nhận. Không đổi nhãn, không nâng metric và không chạy lại API để làm đẹp điểm.
 - Không có `.env`, `.env.deploy` hoặc `.venv` trong danh sách file Git của hai nhánh được kiểm tra.
@@ -57,7 +58,7 @@ sudo -u ali33-demo env PYTHONDONTWRITEBYTECODE=1 \
 
 Các việc còn lại trước khi xác nhận đủ bài:
 
-1. Nhóm chốt phương án và nhánh/commit nộp, tích hợp code và báo cáo để người chấm kiểm được trong cùng nhánh.
+1. **Đã thực hiện:** chọn main làm nhánh tích hợp, đưa code và báo cáo về cùng nhánh và giữ lịch sử tác giả. Commit chốt mã ghi trong TEAM.md.
 2. Nghĩa và Hùng bổ sung khai báo AI, phần việc kỹ thuật thực tế, commit và log tương ứng; cập nhật TEAM.md theo bằng chứng mới.
 3. Mỗi thành viên tự nộp link repo trên LMS. Trạng thái LMS, thông báo gia hạn và khả năng tự giải thích bài không xác minh được bằng kiểm tra Git này.
 

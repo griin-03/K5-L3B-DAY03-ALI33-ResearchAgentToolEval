@@ -1,0 +1,64 @@
+[
+  {
+    "scenario": "normal_research",
+    "file": "transcripts/v5-tools_openrouter_20261110T184039996396.transcript.json",
+    "turns": 1,
+    "statuses": [
+      "answered"
+    ],
+    "tool_errors": 0,
+    "tool_calls": [
+      [
+        "lookup"
+      ]
+    ]
+  },
+  {
+    "scenario": "missing_url_then_fill",
+    "file": "transcripts/v5-tools_openrouter_20261110T184048278408.transcript.json",
+    "turns": 2,
+    "statuses": [
+      "waiting_for_user",
+      "answered"
+    ],
+    "tool_errors": 0,
+    "tool_calls": [
+      [
+        "clarify"
+      ],
+      [
+        "fetch"
+      ]
+    ]
+  },
+  {
+    "scenario": "delivery_then_cancel",
+    "file": "transcripts/v5-tools_openrouter_20261110T184056434209.transcript.json",
+    "turns": 2,
+    "statuses": [
+      "waiting_for_user",
+      "answered"
+    ],
+    "tool_errors": 0,
+    "tool_calls": [
+      [
+        "clarify"
+      ],
+      []
+    ]
+  },
+  {
+    "scenario": "new_tool_dedup",
+    "file": "transcripts/v5-tools_openrouter_20261110T184100366486.transcript.json",
+    "turns": 1,
+    "statuses": [
+      "answered"
+    ],
+    "tool_errors": 0,
+    "tool_calls": [
+      [
+        "deduplicate_sources"
+      ]
+    ]
+  }
+]

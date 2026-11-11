@@ -6,11 +6,11 @@
 - Lớp: **L3B**, khóa K5, Day 03 — Research Agent Tool Eval.
 - Repo nhóm: [K5-L3B-DAY03-ALI33-ResearchAgentToolEval](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval).
 - Báo cáo chính: [report/team/group_report.md](report/team/group_report.md).
-- Nhánh chứa báo cáo được bổ sung: `main`.
-- Nhánh chứa phương án kỹ thuật đã triển khai: [`le-thanh-tung/solo-day03`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/tree/le-thanh-tung/solo-day03).
+- Nhánh tích hợp code, log và báo cáo để nộp: **`main`**.
+- Nhánh nguồn đã được tích hợp: [`le-thanh-tung/solo-day03`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/tree/le-thanh-tung/solo-day03).
 - Commit kỹ thuật dùng làm bằng chứng: [`fddd7ff8bc306475031112582eeee98805b28f3b`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/fddd7ff8bc306475031112582eeee98805b28f3b).
 - Cập nhật UI mở trực tiếp, không cần mã demo: [commit `70c5f3a`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/70c5f3add97a06ef564097436c7a432dec897fa7), [bằng chứng kiểm tra VPS](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/70c5f3add97a06ef564097436c7a432dec897fa7/starter_v0/analysis/public-access.json).
-- Nhánh/commit nộp cuối: nhóm cần thống nhất sau khi so sánh hoặc tích hợp các phương án. Việc bổ sung báo cáo trên `main` chưa thay thế bước này.
+- Đã tích hợp phương án của Tùng vào `main` theo yêu cầu trưởng nhóm; giữ lịch sử commit và báo cáo của cả ba thành viên. Commit nguồn UI hiện tại: `70c5f3a`; commit tích hợp được ghi trong lần cập nhật chốt code.
 
 ## Thành viên
 
@@ -32,7 +32,7 @@
 
 ### Phần việc phụ trách
 
-Chuẩn bị một phương án để nhóm so sánh: setup API, đo baseline, tối ưu prompt/tool declaration, bổ sung tool, kiểm thử, eval nhóm, UI, live chat và triển khai demo trên VPS.
+Chuẩn bị phương án kỹ thuật và tích hợp lên main: setup API, đo baseline, tối ưu prompt/tool declaration, bổ sung tool, kiểm thử, eval nhóm, UI, live chat và triển khai demo trên VPS.
 
 ### Đóng góp cụ thể
 
@@ -83,4 +83,4 @@ Hùng khai báo đã chỉnh giao diện để hiển thị phản hồi chat, �
 
 ## Kiểm tra trước khi chốt bài
 
-Xem [đối chiếu ngày 11/11/2026](report/team/submission_audit.md) để biết những mục đã có, khác biệt giữa main và nhánh demo, cùng phần từng thành viên cần bổ sung.
+Xem [đối chiếu ngày 11/11/2026](report/team/submission_audit.md) để biết những mục đã có, khác biệt giữa main và nhánh demo, cùng phần từng thành viên cần bổ sung. Code, log và báo cáo hiện đã được tích hợp trên main.

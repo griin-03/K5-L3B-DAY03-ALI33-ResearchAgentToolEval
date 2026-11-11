@@ -1,0 +1,9 @@
+{
+  "provider": "openrouter",
+  "status": "PASS",
+  "exit_code": 0,
+  "stdout": "OK provider=openrouter model=openai/gpt-4o-mini\ntool=timeline\nargs={'screenname': 'sama', 'limit': 1}\n",
+  "stderr": "",
+  "elapsed_seconds": 1.79,
+  "checked_at": "2026-11-10T18:00:26+07:00"
+}

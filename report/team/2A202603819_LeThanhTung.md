@@ -8,11 +8,11 @@
 - GitHub: [griin-03](https://github.com/griin-03).
 - Nhóm: **ALI33**; lớp **L3B**, khóa K5.
 - Bài lab: Day 03 — Research Agent Tool Eval.
-- Nhánh kỹ thuật: `le-thanh-tung/solo-day03`; commit bằng chứng: [`fddd7ff`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/fddd7ff8bc306475031112582eeee98805b28f3b).
+- Nhánh nộp đã tích hợp: **main**; nhánh nguồn: `le-thanh-tung/solo-day03`; commit bằng chứng: [`fddd7ff`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/fddd7ff8bc306475031112582eeee98805b28f3b).
 
 ## 2. Phần việc phụ trách
 
-Tôi chuẩn bị một phương án để nhóm so sánh trước khi chọn hoặc tích hợp bản nộp: setup môi trường và API, đo baseline, tối ưu prompt/tool declaration, thêm tool, kiểm thử, xây eval nhóm, làm UI, lưu live chat và triển khai demo trên VPS. Code và thao tác kỹ thuật có Codex hỗ trợ; phần dưới ghi rõ sản phẩm và bằng chứng kiểm tra.
+Tôi chuẩn bị phương án và yêu cầu tích hợp vào main làm phần kỹ thuật của bản nộp: setup môi trường và API, đo baseline, tối ưu prompt/tool declaration, thêm tool, kiểm thử, xây eval nhóm, làm UI, lưu live chat và triển khai demo trên VPS. Code và thao tác kỹ thuật có Codex hỗ trợ; phần dưới ghi rõ sản phẩm và bằng chứng kiểm tra.
 
 ## 3. Đóng góp cụ thể
 
@@ -29,7 +29,7 @@ Tôi chuẩn bị một phương án để nhóm so sánh trước khi chọn ho
 
 ## 4. Bằng chứng
 
-Các liên kết kỹ thuật dưới đây trỏ tới commit cố định đã push để đối chiếu được kết quả, dù nhóm chưa chọn nhánh nộp cuối.
+Các liên kết kỹ thuật dưới đây trỏ tới commit cố định đã push để đối chiếu được kết quả, và hiện đã nằm trong lịch sử main.
 
 - File/commit/PR: [commit kỹ thuật fddd7ff](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/fddd7ff8bc306475031112582eeee98805b28f3b), [báo cáo nhóm Phần A + B](group_report.md), [khai báo đóng góp trong TEAM.md](../../TEAM.md#lethanhtung-2a202603819).
 - Các vòng thử nghiệm: [version_log.csv](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/starter_v0/artifacts/version_log.csv), [comparison.json](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/starter_v0/analysis/comparison.json), các run cụ thể tại mục B1 của báo cáo nhóm.
@@ -48,4 +48,4 @@ Phương án có code và bằng chứng cho các hạng mục kỹ thuật đã
 
 Case R12 vẫn không đạt tiêu chí tự động: agent hỏi nội dung bằng `clarify(response_type=text)` trong khi nhãn đòi `yes_no`. Ngoài ra, một yêu cầu đọc `example.com` trên runtime VPS bị model hỏi lại trước khi gọi fetch. Cả hai hạn chế được giữ trong báo cáo. Các vòng v3/v4 không cải thiện cũng được giữ nguyên để đối chiếu. UI chặn gửi Telegram thật; chưa có bằng chứng gửi thật, local model hoặc người ngoài nhóm dùng thử.
 
-Bước tiếp theo là review nguồn và câu trả lời, thử giả thuyết xử lý yêu cầu gửi khi thiếu nội dung, sửa hành vi đánh giá URL trước khi đọc và để nhóm so sánh/chọn phương án. Tôi cần tự đọc, dùng thử và giải thích được các thay đổi khi được hỏi; việc có log và AI hỗ trợ không thay thế yêu cầu hiểu bài. Báo cáo này không xác nhận thay phần việc, commit hoặc tự đánh giá của thành viên khác.
+Bước tiếp theo là review nguồn và câu trả lời, thử giả thuyết xử lý yêu cầu gửi khi thiếu nội dung, sửa hành vi đánh giá URL trước khi đọc và phối hợp hoàn thiện bằng chứng đóng góp riêng của từng thành viên trên main. Tôi cần tự đọc, dùng thử và giải thích được các thay đổi khi được hỏi; việc có log và AI hỗ trợ không thay thế yêu cầu hiểu bài. Báo cáo này không xác nhận thay phần việc, commit hoặc tự đánh giá của thành viên khác.
