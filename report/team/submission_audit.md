@@ -4,6 +4,8 @@
 
 **Cập nhật sau yêu cầu tích hợp:** code và log của nhánh demo đã được đưa vào **main**, giữ ba báo cáo cá nhân và lịch sử commit. Phần kỹ thuật của Tùng đã nằm trên nhánh nộp; phần còn cần bổ sung là bằng chứng đóng góp, commit kỹ thuật và khai báo AI của Nghĩa/Hùng. Các SHA phía trên là mốc kiểm tra trước khi tích hợp.
 
+Commit merge chốt mã: [`ccb7fb6`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/ccb7fb6b26b4a766cbf844b8515d6d1178f6b1cf), gồm cả hai nhánh cha; các cập nhật tài liệu sau commit này không đổi source đã test.
+
 ## 1. Cá nhân và sự thống nhất trong TEAM.md
 
 | Thành viên | Đã có | Còn cần hoàn thiện |

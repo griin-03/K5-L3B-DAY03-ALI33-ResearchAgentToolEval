@@ -10,7 +10,7 @@
 - Nhánh nguồn đã được tích hợp: [`le-thanh-tung/solo-day03`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/tree/le-thanh-tung/solo-day03).
 - Commit kỹ thuật dùng làm bằng chứng: [`fddd7ff8bc306475031112582eeee98805b28f3b`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/fddd7ff8bc306475031112582eeee98805b28f3b).
 - Cập nhật UI mở trực tiếp, không cần mã demo: [commit `70c5f3a`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/70c5f3add97a06ef564097436c7a432dec897fa7), [bằng chứng kiểm tra VPS](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/70c5f3add97a06ef564097436c7a432dec897fa7/starter_v0/analysis/public-access.json).
-- Đã tích hợp phương án của Tùng vào `main` theo yêu cầu trưởng nhóm; giữ lịch sử commit và báo cáo của cả ba thành viên. Commit nguồn UI hiện tại: `70c5f3a`; commit tích hợp được ghi trong lần cập nhật chốt code.
+- Commit tích hợp chốt code/run: [`ccb7fb6`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/ccb7fb6b26b4a766cbf844b8515d6d1178f6b1cf). Đã đưa phương án của Tùng vào **main**, giữ lịch sử commit và báo cáo của cả ba thành viên; commit nguồn UI: `70c5f3a`.
 
 ## Thành viên
 
