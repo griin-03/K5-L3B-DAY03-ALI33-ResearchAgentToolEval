@@ -26,7 +26,7 @@
 |---|---|---|
 | Lê Thanh Tùng — 2A202603819 | [2A202603819_LeThanhTung.md](report/team/2A202603819_LeThanhTung.md) | Đã có phần việc, bằng chứng, khai báo AI và đối chiếu kết quả. |
 | Cấn Xuân Nghĩa — 2A202603805 | [2A202603805_CanXuanNghia.md](report/team/2A202603805_CanXuanNghia.md) | Đã có báo cáo phân tích tool/test/eval; chưa có commit kỹ thuật và khai báo công cụ AI để đối chiếu. |
-| Nguyễn Mạnh Hùng — 2A202603852 | [2A202603852_NguyenManhHung.md](report/team/2A202603852_NguyenManhHung.md) | Đã có báo cáo cá nhân tự khai phần UI/live demo; cần bổ sung liên kết commit code và log để đối chiếu. |
+| Nguyễn Mạnh Hùng — 2A202603852 | [2A202603852_NguyenManhHung.md](report/team/2A202603852_NguyenManhHung.md) | Đã có báo cáo cá nhân tự khai phần UI/live demo, liên kết commit code và log để đối chiếu. |
 
 ## LeThanhTung-2A202603819
 
