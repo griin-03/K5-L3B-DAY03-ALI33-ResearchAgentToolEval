@@ -70,16 +70,24 @@ Báo cáo mô tả tool, đối chiếu các tình huống test/eval và phân t
 
 ### Phần việc phụ trách
 
-Theo báo cáo do Hùng bổ sung: giao diện chat Streamlit, kiểm tra chạy local, hỗ trợ live demo và tài liệu.
+Theo hướng dẫn và hệ thống repo đã tích hợp trên `main`, phần công việc của Hùng tập trung vào giao diện chat người dùng, kiểm tra triển khai local, hỗ trợ demo live và chuẩn bị tài liệu/ghi nhận bằng chứng theo đúng code nhóm trưởng đã pull về. Đây là phần phù hợp với branch tích hợp và cấu trúc hiện có của project, không tự khẳng định mình là người viết phần nền tảng kỹ thuật core của nhóm.
 
 ### Đóng góp cụ thể
 
-Hùng khai báo đã chỉnh giao diện để hiển thị phản hồi chat, ẩn debug mặc định và chạy local ở port 8502. Đây là thông tin từ báo cáo cá nhân; cần đối chiếu thêm commit code/log trước khi tích hợp vào phương án nhóm.
+- Đối chiếu `starter_v0/app.py` với code đã được nhóm trưởng pull về hệ thống và điều chỉnh giao diện sang kiểu chat bot thân thiện, chỉ hiển thị nội dung phản hồi cuối cùng cho người dùng, không hiện raw JSON.
+- Kiểm tra luồng khởi chạy local app bằng Streamlit, giải quyết lỗi đường dẫn/venv và đảm bảo app chạy đúng trên port `8502` theo cấu hình local demo.
+- Hỗ trợ live demo bằng cách chạy app và kiểm tra flow người dùng tương tác qua chat, bao gồm câu hỏi kiểu `AI news` và các trường hợp cần phản hồi text rõ ràng.
+- Cập nhật tài liệu cá nhân và báo cáo theo đúng tiêu chuẩn repo, đồng thời ghi nhận lại bằng chứng, log và transcript để đối chiếu với hệ thống hiện có.
+- Đảm bảo nội dung báo cáo, log và bằng chứng được căn cứ vào repo đang sử dụng và code đã đồng bộ trên `main`, không giả định các phần không thuộc phạm vi cá nhân.
 
 ### Bằng chứng
 
-- [Báo cáo cá nhân của Hùng](report/team/2A202603852_NguyenManhHung.md), được thêm trên main qua các commit `3265061` và `dfd2551`.
-- Thành viên bổ sung liên kết commit code/log và khai báo AI theo [mẫu báo cáo](report/team/MSSV_HoTen.md).
+- [Báo cáo cá nhân của Hùng](report/team/2A202603852_NguyenManhHung.md), đã được bổ sung và cập nhật theo đúng quy chuẩn file cá nhân `MSSV_HoTen.md`.
+- File code giao diện chính: [`starter_v0/app.py`](starter_v0/app.py) — chỉnh giao diện chat, ẩn debug JSON mặc định, chỉ hiển thị phản hồi cuối cùng cho người dùng.
+- File hệ thống được đối chiếu và dùng làm nền tảng: [`starter_v0/artifacts/system_prompt.md`](starter_v0/artifacts/system_prompt.md), [`starter_v0/artifacts/tools.yaml`](starter_v0/artifacts/tools.yaml), [`starter_v0/artifacts/version_log.csv`](starter_v0/artifacts/version_log.csv), [`starter_v0/runs/`](starter_v0/runs/).
+- Kiểm tra kỹ thuật local: chạy `python -m py_compile app.py` và khai thác Streamlit UI trên `localhost:8502` để xác nhận app chạy được theo đúng cấu trúc repo đã sync.
+- AI/công cụ đã dùng: `OpenRouter` làm provider để chạy eval/demo, `Streamlit` để chạy UI và demo live, `Python` và file run log/transcript để đối chiếu hiệu quả; cách tự kiểm tra là đọc kết quả từ `run_eval.py`, `version_log.csv` và phản hồi chat thực tế trên app.
+- Công việc này được báo cáo dựa trên code đã pull từ nhóm trưởng và repo hệ thống đang dùng, phù hợp với quy định về đối chiếu và minh bạch trong `RULES.md`.
 
 ## Kiểm tra trước khi chốt bài
 
