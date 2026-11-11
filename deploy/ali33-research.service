@@ -1,0 +1,28 @@
+[Unit]
+Description=ALI33 Research Desk demo
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ali33-demo
+Group=ali33-demo
+WorkingDirectory=/opt/ali33-research/current/starter_v0
+Environment=TZ=Asia/Ho_Chi_Minh
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=DAY03_TRANSCRIPTS_DIR=/opt/ali33-research/shared/transcripts
+ExecStart=/opt/ali33-research/.venv/bin/python -m streamlit run app.py --server.address 127.0.0.1 --server.port 8503 --server.fileWatcherType none --browser.gatherUsageStats false
+Restart=on-failure
+RestartSec=3
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/ali33-research/shared
+MemoryMax=1G
+CPUQuota=100%
+TasksMax=128
+
+[Install]
+WantedBy=multi-user.target

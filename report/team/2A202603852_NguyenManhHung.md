@@ -1,8 +1,4 @@
-# Báo cáo cá nhân — HoVaTen-MSSV
-
-Đổi tên file theo quy tắc `MSSV_HoTen.md`.
-
-Ví dụ: `20241234_NguyenVanAn.md`.
+# Báo cáo cá nhân — Nguyễn Mạnh Hùng — 2A202603852
 
 ## 1. Thông tin thành viên
 

@@ -6,10 +6,11 @@
 - Lớp: **L3B**, khóa K5, Day 03 — Research Agent Tool Eval.
 - Repo nhóm: [K5-L3B-DAY03-ALI33-ResearchAgentToolEval](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval).
 - Báo cáo chính: [report/team/group_report.md](report/team/group_report.md).
-- Nhánh chứa báo cáo được bổ sung: `main`.
-- Nhánh chứa phương án kỹ thuật đã triển khai: [`le-thanh-tung/solo-day03`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/tree/le-thanh-tung/solo-day03).
+- Nhánh tích hợp code, log và báo cáo để nộp: **`main`**.
+- Nhánh nguồn đã được tích hợp: [`le-thanh-tung/solo-day03`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/tree/le-thanh-tung/solo-day03).
 - Commit kỹ thuật dùng làm bằng chứng: [`fddd7ff8bc306475031112582eeee98805b28f3b`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/fddd7ff8bc306475031112582eeee98805b28f3b).
-- Nhánh/commit nộp cuối: nhóm cần thống nhất sau khi so sánh hoặc tích hợp các phương án. Việc bổ sung báo cáo trên `main` chưa thay thế bước này.
+- Cập nhật UI mở trực tiếp, không cần mã demo: [commit `70c5f3a`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/70c5f3add97a06ef564097436c7a432dec897fa7), [bằng chứng kiểm tra VPS](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/70c5f3add97a06ef564097436c7a432dec897fa7/starter_v0/analysis/public-access.json).
+- Commit tích hợp chốt code/run: [`ccb7fb6`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/ccb7fb6b26b4a766cbf844b8515d6d1178f6b1cf). Đã đưa phương án của Tùng vào **main**, giữ lịch sử commit và báo cáo của cả ba thành viên; commit nguồn UI: `70c5f3a`.
 
 ## Thành viên
 
@@ -24,14 +25,14 @@
 | Thành viên | Báo cáo | Trạng thái đóng góp và bằng chứng |
 |---|---|---|
 | Lê Thanh Tùng — 2A202603819 | [2A202603819_LeThanhTung.md](report/team/2A202603819_LeThanhTung.md) | Đã có phần việc, bằng chứng, khai báo AI và đối chiếu kết quả. |
-| Cấn Xuân Nghĩa — 2A202603805 | Tên file cần tạo: `report/team/2A202603805_CanXuanNghia.md` | Chưa có báo cáo/commit cá nhân được ghi nhận trong phạm vi cập nhật này; thành viên bổ sung theo công việc thật. |
-| Nguyễn Mạnh Hùng — 2A202603852 | Tên file cần tạo: `report/team/2A202603852_NguyenManhHung.md` | Chưa có báo cáo/commit cá nhân được ghi nhận trong phạm vi cập nhật này; thành viên bổ sung theo công việc thật. |
+| Cấn Xuân Nghĩa — 2A202603805 | [2A202603805_CanXuanNghia.md](report/team/2A202603805_CanXuanNghia.md) | Đã có báo cáo phân tích tool/test/eval; chưa có commit kỹ thuật và khai báo công cụ AI để đối chiếu. |
+| Nguyễn Mạnh Hùng — 2A202603852 | [2A202603852_NguyenManhHung.md](report/team/2A202603852_NguyenManhHung.md) | Đã có báo cáo cá nhân tự khai phần UI/live demo; cần bổ sung liên kết commit code và log để đối chiếu. |
 
 ## LeThanhTung-2A202603819
 
 ### Phần việc phụ trách
 
-Chuẩn bị một phương án để nhóm so sánh: setup API, đo baseline, tối ưu prompt/tool declaration, bổ sung tool, kiểm thử, eval nhóm, UI, live chat và triển khai demo trên VPS.
+Chuẩn bị phương án kỹ thuật và tích hợp lên main: setup API, đo baseline, tối ưu prompt/tool declaration, bổ sung tool, kiểm thử, eval nhóm, UI, live chat và triển khai demo trên VPS.
 
 ### Đóng góp cụ thể
 
@@ -53,26 +54,33 @@ Chuẩn bị một phương án để nhóm so sánh: setup API, đo baseline, t
 
 ### Phần việc phụ trách
 
-Thành viên bổ sung phần việc đã thực hiện khi nhóm so sánh hoặc tích hợp phương án.
+Theo báo cáo do Nghĩa bổ sung: rà soát `deduplicate_sources`, unit test, 10 case eval nhóm, diễn giải metric và đề xuất cải thiện.
 
 ### Đóng góp cụ thể
 
-Chưa có thông tin đóng góp cá nhân được xác nhận trong phạm vi cập nhật này.
+Báo cáo mô tả tool, đối chiếu các tình huống test/eval và phân tích kết quả 70% → 95%, group 10/10. Nghĩa ghi rõ không nhận các code/test/run có sẵn là do mình tạo; lần kiểm tra trong môi trường của bạn ấy còn thiếu Streamlit. Phần đã phân tích trong báo cáo cần phân biệt với phần code/test trực tiếp thực hiện.
 
 ### Bằng chứng
 
-Thành viên bổ sung báo cáo `report/team/2A202603805_CanXuanNghia.md` và liên kết file/commit/PR thực tế; khai báo AI và cách kiểm tra kết quả theo [mẫu báo cáo](report/team/MSSV_HoTen.md).
+- [Báo cáo cá nhân của Nghĩa](report/team/2A202603805_CanXuanNghia.md), được thêm trên main qua commit `fe835ac`.
+- Cần bổ sung commit kỹ thuật, log kiểm tra do thành viên thực hiện và khai báo công cụ AI theo [RULES.md](RULES.md). Kết quả pytest chung trên VPS không thay thế bằng chứng đóng góp riêng.
+
 
 ## NguyenManhHung-2A202603852
 
 ### Phần việc phụ trách
 
-Thành viên bổ sung phần việc đã thực hiện khi nhóm so sánh hoặc tích hợp phương án.
+Theo báo cáo do Hùng bổ sung: giao diện chat Streamlit, kiểm tra chạy local, hỗ trợ live demo và tài liệu.
 
 ### Đóng góp cụ thể
 
-Chưa có thông tin đóng góp cá nhân được xác nhận trong phạm vi cập nhật này.
+Hùng khai báo đã chỉnh giao diện để hiển thị phản hồi chat, ẩn debug mặc định và chạy local ở port 8502. Đây là thông tin từ báo cáo cá nhân; cần đối chiếu thêm commit code/log trước khi tích hợp vào phương án nhóm.
 
 ### Bằng chứng
 
-Thành viên bổ sung báo cáo `report/team/2A202603852_NguyenManhHung.md` và liên kết file/commit/PR thực tế; khai báo AI và cách kiểm tra kết quả theo [mẫu báo cáo](report/team/MSSV_HoTen.md).
+- [Báo cáo cá nhân của Hùng](report/team/2A202603852_NguyenManhHung.md), được thêm trên main qua các commit `3265061` và `dfd2551`.
+- Thành viên bổ sung liên kết commit code/log và khai báo AI theo [mẫu báo cáo](report/team/MSSV_HoTen.md).
+
+## Kiểm tra trước khi chốt bài
+
+Xem [đối chiếu ngày 11/11/2026](report/team/submission_audit.md) để biết những mục đã có, khác biệt giữa main và nhánh demo, cùng phần từng thành viên cần bổ sung. Code, log và báo cáo hiện đã được tích hợp trên main.
