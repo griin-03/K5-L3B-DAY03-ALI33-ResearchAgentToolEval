@@ -25,7 +25,7 @@
 | Thành viên | Báo cáo | Trạng thái đóng góp và bằng chứng |
 |---|---|---|
 | Lê Thanh Tùng — 2A202603819 | [2A202603819_LeThanhTung.md](report/team/2A202603819_LeThanhTung.md) | Đã có phần việc, bằng chứng, khai báo AI và đối chiếu kết quả. |
-| Cấn Xuân Nghĩa — 2A202603805 | Tên file cần tạo: `report/team/2A202603805_CanXuanNghia.md` | Chưa có báo cáo/commit cá nhân được ghi nhận trong phạm vi cập nhật này; thành viên bổ sung theo công việc thật. |
+| Cấn Xuân Nghĩa — 2A202603805 | [2A202603805_CanXuanNghia.md](report/team/2A202603805_CanXuanNghia.md) | Đã có báo cáo phân tích tool/test/eval; chưa có commit kỹ thuật và khai báo công cụ AI để đối chiếu. |
 | Nguyễn Mạnh Hùng — 2A202603852 | [2A202603852_NguyenManhHung.md](report/team/2A202603852_NguyenManhHung.md) | Đã có báo cáo cá nhân tự khai phần UI/live demo; cần bổ sung liên kết commit code và log để đối chiếu. |
 
 ## LeThanhTung-2A202603819
@@ -54,15 +54,17 @@ Chuẩn bị một phương án để nhóm so sánh: setup API, đo baseline, t
 
 ### Phần việc phụ trách
 
-Thành viên bổ sung phần việc đã thực hiện khi nhóm so sánh hoặc tích hợp phương án.
+Theo báo cáo do Nghĩa bổ sung: rà soát `deduplicate_sources`, unit test, 10 case eval nhóm, diễn giải metric và đề xuất cải thiện.
 
 ### Đóng góp cụ thể
 
-Chưa có thông tin đóng góp cá nhân được xác nhận trong phạm vi cập nhật này.
+Báo cáo mô tả tool, đối chiếu các tình huống test/eval và phân tích kết quả 70% → 95%, group 10/10. Nghĩa ghi rõ không nhận các code/test/run có sẵn là do mình tạo; lần kiểm tra trong môi trường của bạn ấy còn thiếu Streamlit. Phần đã phân tích trong báo cáo cần phân biệt với phần code/test trực tiếp thực hiện.
 
 ### Bằng chứng
 
-Thành viên bổ sung báo cáo `report/team/2A202603805_CanXuanNghia.md` và liên kết file/commit/PR thực tế; khai báo AI và cách kiểm tra kết quả theo [mẫu báo cáo](report/team/MSSV_HoTen.md).
+- [Báo cáo cá nhân của Nghĩa](report/team/2A202603805_CanXuanNghia.md), được thêm trên main qua commit `fe835ac`.
+- Cần bổ sung commit kỹ thuật, log kiểm tra do thành viên thực hiện và khai báo công cụ AI theo [RULES.md](RULES.md). Kết quả pytest chung trên VPS không thay thế bằng chứng đóng góp riêng.
+
 
 ## NguyenManhHung-2A202603852
 
@@ -78,3 +80,7 @@ Hùng khai báo đã chỉnh giao diện để hiển thị phản hồi chat, �
 
 - [Báo cáo cá nhân của Hùng](report/team/2A202603852_NguyenManhHung.md), được thêm trên main qua các commit `3265061` và `dfd2551`.
 - Thành viên bổ sung liên kết commit code/log và khai báo AI theo [mẫu báo cáo](report/team/MSSV_HoTen.md).
+
+## Kiểm tra trước khi chốt bài
+
+Xem [đối chiếu ngày 11/11/2026](report/team/submission_audit.md) để biết những mục đã có, khác biệt giữa main và nhánh demo, cùng phần từng thành viên cần bổ sung.

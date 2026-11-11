@@ -65,7 +65,7 @@ Research Desk tìm nguồn web và bài đăng X, đọc URL, lọc nguồn trù
 | v4 | tools.yaml | Removing the unconditional text default and adding intent-based schema examples disambiguates send confirmation from data collection | 95% | 100% | 95% | 100% | [v4_B_base_openrouter_20261110T183251279072.json](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/starter_v0/runs/v4_B_base_openrouter_20261110T183251279072.json) |
 | v5-tools | v2-selected plus tool/workflow integration | The simpler tied-best v2 policy can support source deduplication and bounded multi-step research without regression on base cases | 95% | 100% | 95% | 100% | [v5-tools_B_base_openrouter_20261110T184001500765.json](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/starter_v0/runs/v5-tools_B_base_openrouter_20261110T184001500765.json) |
 
-Tất cả các run được chọn ở bảng có **provider_error_cases = 0**, **measured_cases = total_cases = 20**, và không có tool-execution error. Bản cuối tăng từ **70% lên 95% (+25 điểm phần trăm)** trên bộ base, không phải bảo đảm 95% đúng cho mọi yêu cầu. Bằng chứng tổng hợp: [version_log.csv](../../starter_v0/artifacts/version_log.csv), [comparison.json](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/starter_v0/analysis/comparison.json).
+Tất cả các run được chọn ở bảng có **provider_error_cases = 0**, **measured_cases = total_cases = 20**, và không có tool-execution error. Bản cuối tăng từ **70% lên 95% (+25 điểm phần trăm)** trên bộ base, không phải bảo đảm 95% đúng cho mọi yêu cầu. Bằng chứng tổng hợp: [version_log.csv](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/starter_v0/artifacts/version_log.csv), [comparison.json](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/starter_v0/analysis/comparison.json).
 
 ### B2. Failure analysis
 
@@ -99,7 +99,7 @@ Dataset được khóa trước khi chạy suite group; SHA-256: `c7fd16074cfff7
 | G09_dedup_latest_payload | multi | Carry the latest supplied payload to the new tool; manually verify two inputs and one unique source. | deduplicate_sources | PASS |
 | G10_change_social_order_and_limit | multi | Carry a corrected ordering and final count across turns without stale arguments. | social_search | PASS |
 
-Kết quả: **10/10**, provider errors **0**. [v5-tools_B_group_openrouter_20261110T184039678428.json](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/starter_v0/runs/v5-tools_B_group_openrouter_20261110T184039678428.json); [dataset](../../starter_v0/data/eval_group.json).
+Kết quả: **10/10**, provider errors **0**. [v5-tools_B_group_openrouter_20261110T184039678428.json](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/starter_v0/runs/v5-tools_B_group_openrouter_20261110T184039678428.json); [dataset](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/starter_v0/data/eval_group.json).
 
 Hai case dedup tự động chấm routing; kiểm tra payload/count riêng cho thấy G01 giữ 3 đầu vào → 2 nguồn duy nhất, G09 dùng đúng danh sách mới 2 → 1. Model giữ metadata nguồn đầu. Harness gốc không so sánh an toàn danh sách object trong `expect.args`, nên không ghi hai case này là phép kiểm đầy đủ chất lượng nội dung.
 
@@ -121,7 +121,7 @@ Bốn phiên chạy **chat.py thật** với API thật và các lượt ngườ
 | Hạng mục | Bằng chứng | Kết quả / giới hạn |
 |---|---|---|
 | Tool mới | [tool.py](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/starter_v0/tools/deduplicate_sources/tool.py), [TOOL.md](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/starter_v0/tools/deduplicate_sources/TOOL.md), registry + tools.yaml | Local, không mạng/side effect; giữ bản đầu, không chứng minh hai bài khác URL là cùng nội dung. |
-| Unit tests | [test_tools_todo.py](../../starter_v0/tests/test_tools_todo.py), [test_demo.py](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/starter_v0/tests/test_demo.py) | **97 passed, 0 failed, 0 skipped**, cả local trước khi tắt và VPS ARM. Tool mới có 10 case tính cả tham số hóa: happy path, input xấu, lỗi bất ngờ, bảo toàn URL và giới hạn. |
+| Unit tests | [test_tools_todo.py](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/starter_v0/tests/test_tools_todo.py), [test_demo.py](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/starter_v0/tests/test_demo.py) | **97 passed, 0 failed, 0 skipped**, cả local trước khi tắt và VPS ARM. Tool mới có 10 case tính cả tham số hóa: happy path, input xấu, lỗi bất ngờ, bảo toàn URL và giới hạn. |
 | UI | [app.py](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/starter_v0/app.py), [demo_runtime.py](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/starter_v0/demo_runtime.py) | Có chat, nguồn/tool events, lỗi thật, tải transcript và phiên mới; mở trực tiếp không cần mã. UI không gửi Telegram. |
 | Triển khai | [cấu hình](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/deploy/README.md), [kiểm tra VPS](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/blob/fddd7ff8bc306475031112582eeee98805b28f3b/starter_v0/analysis/deployment.json) | Service riêng, loopback upstream, Nginx HTTPS; key chỉ ở server, không commit. |
 
@@ -150,10 +150,10 @@ Không thực hiện trong phương án này. Không có metric hoặc run local
 | Thành viên | MSSV | Đóng góp đã có bằng chứng trong báo cáo này | Báo cáo / bằng chứng |
 |---|---|---|---|
 | Lê Thanh Tùng | **2A202603819** | Chuẩn bị phương án: cấu hình API, các vòng prompt/schema, tool mới, test/eval, UI, live chat và triển khai VPS/domain; Codex hỗ trợ thực hiện. | [Báo cáo cá nhân](2A202603819_LeThanhTung.md), [commit kỹ thuật `fddd7ff`](https://github.com/griin-03/K5-L3B-DAY03-ALI33-ResearchAgentToolEval/commit/fddd7ff8bc306475031112582eeee98805b28f3b), [TEAM.md](../../TEAM.md#lethanhtung-2a202603819). |
-| Cấn Xuân Nghĩa | 2A202603805 | Chưa có báo cáo/commit cá nhân được ghi nhận trong phạm vi bằng chứng này. | Thành viên bổ sung phần việc thực tế vào TEAM.md và báo cáo cá nhân. |
+| Cấn Xuân Nghĩa | 2A202603805 | Đã có báo cáo phân tích tool/test/eval; tác giả chưa nhận code/run có sẵn là phần tự làm, còn cần commit kỹ thuật và khai báo AI. | [Báo cáo cá nhân](2A202603805_CanXuanNghia.md), [TEAM.md](../../TEAM.md#canxuannghia-2a202603805). |
 | Nguyễn Mạnh Hùng | 2A202603852 | Báo cáo cá nhân khai báo phần UI Streamlit/local/live demo; cần đối chiếu thêm commit code và log. | [Báo cáo cá nhân đã bổ sung](2A202603852_NguyenManhHung.md), [TEAM.md](../../TEAM.md#nguyenmanhhung-2a202603852). |
 
-Phần đã hoàn thành của Tùng có thể kiểm tra từ các liên kết trên. Để chốt bài nhóm theo [SUBMISSION.md](../../SUBMISSION.md), nhóm còn cần thống nhất nhánh/commit nộp, bổ sung báo cáo và commit kỹ thuật thực tế của từng thành viên; mỗi người tự nộp link repo trên LMS.
+Phần đã hoàn thành của Tùng có thể kiểm tra từ các liên kết trên. Để chốt bài nhóm theo [SUBMISSION.md](../../SUBMISSION.md), nhóm còn cần thống nhất nhánh/commit nộp, hoàn thiện khai báo AI/bằng chứng và commit kỹ thuật thực tế của từng thành viên; mỗi người tự nộp link repo trên LMS.
 
 ## 7. B6 — Hạn chế và hướng cải thiện
 
@@ -169,3 +169,7 @@ Phần đã hoàn thành của Tùng có thể kiểm tra từ các liên kết 
 - Đề bài, RULES, CHECKPOINTS, RUBRIC và source starter trong repo này.
 - [Streamlit chat input](https://docs.streamlit.io/develop/api-reference/chat/st.chat_input), [AppTest](https://docs.streamlit.io/develop/api-reference/app-testing/st.testing.v1.apptest).
 - [Python urllib.parse](https://docs.python.org/3/library/urllib.parse.html), dùng cho tool URL; chính sách loại tracking là lựa chọn riêng của tool.
+
+## 9. Đối chiếu hồ sơ trước khi nộp
+
+Ngày 11/11/2026 đã có đủ ba báo cáo cá nhân. Bản main vẫn chưa tích hợp code/log của nhánh demo; xem [kết quả kiểm tra và các mục còn thiếu](submission_audit.md). Chưa coi hồ sơ nhóm đã hoàn tất chỉ dựa trên số lượng báo cáo.
